@@ -1,11 +1,7 @@
-import SiteHeader from './components/SiteHeader'
-
 export default function Home() {
   return (
     <>
-      <SiteHeader />
-
-      <main>
+      <main id="main-content">
 
         {/* ── HERO ── */}
         <section id="hero">
@@ -16,7 +12,7 @@ export default function Home() {
             <h1 className="hero-h1">Production-Ready Web3 Infrastructure</h1>
             <p className="hero-body">
               We build the boring-but-critical layer that makes Web3 products survive enterprise
-              pilots, regulatory reviews, and scale. You focus on product differentiation — we
+              pilots, regulatory reviews, and scale. You focus on product differentiation, we
               handle the infrastructure complexity that blocks most launches.
             </p>
             <div className="hero-actions">
@@ -162,7 +158,7 @@ export default function Home() {
             <span className="label">Engagement Models</span>
             <h2 className="section-title">How We Work</h2>
             <p className="section-sub">
-              Four structured models that match where you are — from first architecture review to
+              Four structured models that match where you are, from first architecture review to
               ongoing operations.
             </p>
             <div className="steps-grid">
@@ -212,7 +208,7 @@ export default function Home() {
                 <span className="step-badge">Ongoing</span>
                 <p className="step-body">
                   Continuous support, feature delivery, and compliance updates. Three tiers:
-                  Advisor → Builder → Ops-Ready.
+                  Advisor / Builder / Ops-Ready.
                 </p>
                 <p className="step-deliverables">
                   Deliverables: SLA-backed ops · monthly reporting · continuous compliance
@@ -314,19 +310,6 @@ export default function Home() {
 
       </main>
 
-      {/* ── FOOTER ── */}
-      <footer>
-        <div className="container">
-          <div className="footer-inner">
-            <span className="footer-copy">© 2026 AztraTech · aztra.tech</span>
-            <div className="footer-links">
-              <a href="https://github.com/AztraTech-Dev" target="_blank" rel="noopener noreferrer">GitHub</a>
-              <a href="https://www.linkedin.com/company/aztratech-company/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <a href="https://t.me/aztratech" target="_blank" rel="noopener noreferrer">Telegram</a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </>
   )
 }

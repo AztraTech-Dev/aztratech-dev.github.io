@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import SiteFooter from "./components/shell/SiteFooter";
+import SiteHeader from "./components/shell/SiteHeader";
 import "./globals.css";
 
 const inter = Inter({
@@ -10,11 +12,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aztra.tech"),
-  title: "AztraTech — Production-Ready Web3 Infrastructure",
+  title: "AztraTech | Production-Ready Web3 Infrastructure",
   description:
-    "AztraTech builds production-grade Web3 infrastructure — stablecoin payment rails, RWA tokenization, and security engineering for fintech and blockchain companies.",
+    "AztraTech builds production-grade Web3 infrastructure | stablecoin payment rails, RWA tokenization, and security engineering for fintech and blockchain companies.",
   openGraph: {
-    title: "AztraTech — Production-Ready Web3 Infrastructure",
+    title: "AztraTech | Production-Ready Web3 Infrastructure",
     description:
       "We build the boring-but-critical layer that makes Web3 products survive enterprise pilots, regulatory reviews, and scale.",
     url: "https://aztra.tech",
@@ -33,7 +35,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body>{children}</body>
+      <body>
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
+        <SiteHeader />
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }
