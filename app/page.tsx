@@ -1,315 +1,275 @@
+import ArchitectureDecisionPack from "./components/artifacts/ArchitectureDecisionPack";
+import EngineeringProblems from "./components/commercial/EngineeringProblems";
+import EngagementStart from "./components/commercial/EngagementStart";
+import ServicePaths from "./components/commercial/ServicePaths";
+import InfrastructureSystemMap from "./components/diagrams/InfrastructureSystemMap";
+import SystemCoordinationModel from "./components/diagrams/SystemCoordinationModel";
+import ButtonLink from "./components/ui/ButtonLink";
+import CTASection from "./components/ui/CTASection";
+import Container from "./components/ui/Container";
+import SectionIntro from "./components/ui/SectionIntro";
+import { siteConfig } from "../lib/site-config";
+
+const insightTopics = [
+  {
+    category: "Stablecoin Payments",
+    title: "When a Stablecoin Transfer Works but the Payment Still Doesn't",
+  },
+  {
+    category: "RWA & Tokenization",
+    title: "Token Issuance Is One Event. The Asset Lifecycle Is the System.",
+  },
+  {
+    category: "Security Engineering",
+    title:
+      "Why Enterprise Security Reviews Expose Architecture Problems, Not Just Missing Documents",
+  },
+];
+
+const faqItems = [
+  {
+    question: "When should we bring AztraTech into a project?",
+    answer:
+      "When a real technical decision is blocking progress. That can be early architecture, an integration problem, a security concern, or a system that is already in production and becoming difficult to operate.",
+  },
+  {
+    question: "Do you replace payment, custody or infrastructure providers?",
+    answer:
+      "No. We design the system around the providers your product needs, define the boundaries between them and keep provider-specific logic from spreading through the rest of the product.",
+  },
+  {
+    question: "Can you work with an existing engineering team?",
+    answer:
+      "Yes. The scope can be architecture and technical decisions, a specific delivery stream, remediation work, or continued engineering alongside the client's team.",
+  },
+  {
+    question: "Do you provide legal or regulatory advice?",
+    answer:
+      "No. Legal and regulatory interpretation should come from the client's qualified specialists. We translate agreed requirements into technical rules, controls and system behavior within the engineering scope.",
+  },
+];
+
 export default function Home() {
   return (
-    <>
-      <main id="main-content">
-
-        {/* ── HERO ── */}
-        <section id="hero">
-          <div className="container">
-            <p className="hero-eyebrow">
-              Stablecoin Rails &nbsp;·&nbsp; RWA Tokenization &nbsp;·&nbsp; Security-by-Design
-            </p>
-            <h1 className="hero-h1">Production-Ready Web3 Infrastructure</h1>
-            <p className="hero-body">
-              We build the boring-but-critical layer that makes Web3 products survive enterprise
-              pilots, regulatory reviews, and scale. You focus on product differentiation, we
-              handle the infrastructure complexity that blocks most launches.
-            </p>
-            <div className="hero-actions">
-              <a
-                href="https://calendly.com/vladislav-usichenko/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-              >
-                Book Discovery Call
-              </a>
-              <a
-                href="https://github.com/AztraTech-Dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-ghost"
-              >
-                View GitHub
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ── STATS ── */}
-        <section id="about">
-          <div className="container">
-            <div className="stats-grid">
-              <div className="stat-card">
-                <div className="stat-val">40+</div>
-                <div className="stat-desc">Projects Delivered</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-val">$1.2M+</div>
-                <div className="stat-desc">Commercial Value</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-val small">
-                  Web3 · DeFi<br />RWA · Fintech
-                </div>
-                <div className="stat-desc">Domains Served</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── SERVICES ── */}
-        <section id="services">
-          <div className="container">
-            <span className="label">Core Services</span>
-            <h2 className="section-title">Infrastructure That Ships to Production</h2>
-            <p className="section-sub">
-              Production-grade systems for the layer most teams underestimate until it blocks
-              their launch.
-            </p>
-            <div className="services-grid">
-
-              <div className="service-card">
-                <div className="svc-icon" aria-hidden="true">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="1.5" />
-                    <path
-                      d="M9 5.5v7M6.5 7.5h3.75a1.25 1.25 0 0 1 0 2.5H7.75A1.25 1.25 0 0 0 7.75 12.5H11"
-                      stroke="currentColor"
-                      strokeWidth="1.4"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </div>
-                <div className="svc-title">Stablecoin Payment Rails</div>
-                <ul className="svc-bullets">
-                  <li>Multi-corridor settlement architecture</li>
-                  <li>Treasury automation &amp; reconciliation</li>
-                  <li>24/7 ops with compliance-by-design</li>
-                  <li>Real-time monitoring and alerting</li>
-                </ul>
-                <div className="svc-for">
-                  <em>For:</em> PSPs, TMS providers, fintech building global payouts
-                </div>
-              </div>
-
-              <div className="service-card">
-                <div className="svc-icon" aria-hidden="true">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <rect x="2.5" y="2.5" width="13" height="13" rx="2" stroke="currentColor" strokeWidth="1.5" />
-                    <path
-                      d="M5.5 9.5l2.5 2 4.5-5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-                <div className="svc-title">RWA Tokenization Lifecycle</div>
-                <ul className="svc-bullets">
-                  <li>Registry &amp; transfer restrictions</li>
-                  <li>Investor eligibility, subscription &amp; redemption flows</li>
-                  <li>Corporate actions &amp; admin workflows</li>
-                  <li>Audit-ready reporting, hybrid on-chain/off-chain</li>
-                </ul>
-                <div className="svc-for">
-                  <em>For:</em> Fund admins, issuers, tokenization platforms
-                </div>
-              </div>
-
-              <div className="service-card">
-                <div className="svc-icon" aria-hidden="true">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <path
-                      d="M9 2 L3 4.5v5C3 12.6 5.7 15.6 9 16.5c3.3-.9 6-3.9 6-7v-5L9 2z"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M6.5 9l2 2 3.5-3.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-                <div className="svc-title">Security &amp; Compliance Engineering</div>
-                <ul className="svc-bullets">
-                  <li>Continuous security program &amp; release gates</li>
-                  <li>Incident readiness &amp; vendor risk packs</li>
-                  <li>Evidence collection for SOC2 / ISO</li>
-                  <li>Threat modeling &amp; secure SDLC</li>
-                </ul>
-                <div className="svc-for">
-                  <em>For:</em> B2B rails entering regulated and enterprise markets
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        {/* ── HOW WE WORK ── */}
-        <section id="how-we-work">
-          <div className="container">
-            <span className="label">Engagement Models</span>
-            <h2 className="section-title">How We Work</h2>
-            <p className="section-sub">
-              Four structured models that match where you are, from first architecture review to
-              ongoing operations.
-            </p>
-            <div className="steps-grid">
-
-              <div className="step-card">
-                <div className="step-num">01</div>
-                <div className="step-title">Diagnostic Sprint</div>
-                <span className="step-badge">2 – 4 weeks</span>
-                <p className="step-body">
-                  Architecture audit, compliance roadmap, and risk assessment. Ideal for teams
-                  that need clarity before committing to a build.
-                </p>
-                <p className="step-deliverables">
-                  Deliverables: technical roadmap · risk register · prioritized backlog
-                </p>
-              </div>
-
-              <div className="step-card">
-                <div className="step-num">02</div>
-                <div className="step-title">MVP Build</div>
-                <span className="step-badge">8 – 14 weeks</span>
-                <p className="step-body">
-                  Core infrastructure, critical integrations, compliance baseline, and first
-                  production milestone delivered on schedule.
-                </p>
-                <p className="step-deliverables">
-                  Deliverables: production-ready system · integration runbook · compliance baseline
-                </p>
-              </div>
-
-              <div className="step-card">
-                <div className="step-num">03</div>
-                <div className="step-title">Production Scale</div>
-                <span className="step-badge">3 – 6+ months</span>
-                <p className="step-body">
-                  Multi-corridor and multi-asset expansion, security hardening, and full audit
-                  readiness for regulated environments.
-                </p>
-                <p className="step-deliverables">
-                  Deliverables: expanded infrastructure · hardened security · audit package
-                </p>
-              </div>
-
-              <div className="step-card">
-                <div className="step-num">04</div>
-                <div className="step-title">Managed Retainer</div>
-                <span className="step-badge">Ongoing</span>
-                <p className="step-body">
-                  Continuous support, feature delivery, and compliance updates. Three tiers:
-                  Advisor / Builder / Ops-Ready.
-                </p>
-                <p className="step-deliverables">
-                  Deliverables: SLA-backed ops · monthly reporting · continuous compliance
-                </p>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        {/* ── TEAM ── */}
-        <section id="team">
-          <div className="container">
-            <span className="label">Team</span>
-            <h2 className="section-title">Who You Work With</h2>
-            <div className="team-card">
-              <div className="team-name">Vladislav Usichenko</div>
-              <div className="team-role">Founder &amp; CEO</div>
-              <p className="team-bio">
-                B2B technology executive with 40+ deals and $1.2M+ in commercial value across
-                Web3, DeFi, fintech and custom software delivery. Specializes in business
-                development, technical delivery coordination, and assembling specialist teams
-                around complex projects.
+    <main id="main-content" className="home-page">
+      <section className="home-hero">
+        <Container variant="wide">
+          <div className="home-hero__grid">
+            <div className="home-hero__copy">
+              <p className="home-hero__eyebrow">Web3 & Fintech Infrastructure Engineering</p>
+              <h1>We build the infrastructure behind Web3 and fintech products.</h1>
+              <p className="home-hero__lead">
+                Stablecoin payments, tokenized assets and security-sensitive
+                products get harder when they have to coordinate providers,
+                internal state, controls and day-to-day operations. AztraTech
+                designs and builds that infrastructure.
               </p>
-              <p className="team-footnote">
-                Backed by a vetted network of senior Web3 engineers assembled per project.
+              <div className="home-hero__actions">
+                <ButtonLink href={siteConfig.calendlyUrl}>
+                  Book a 30-minute discovery call
+                </ButtonLink>
+                <ButtonLink href="#services" variant="ghost">
+                  See what we work on
+                </ButtonLink>
+              </div>
+              <p className="home-hero__note">
+                No sales presentation required. Start with the current system and what is blocked.
               </p>
             </div>
+
+            <InfrastructureSystemMap />
           </div>
-        </section>
+        </Container>
+      </section>
 
-        {/* ── CONTACT ── */}
-        <section id="contact">
-          <div className="container">
-            <h2 className="contact-headline">Start with a 30-minute discovery call</h2>
-            <p className="contact-sub">No commitment. Clear infrastructure roadmap.</p>
-            <div className="contact-grid">
+      <section id="services" className="home-section home-section--surface">
+        <Container>
+          <SectionIntro
+            eyebrow="Where we usually help"
+            title="Three areas where product complexity quickly becomes infrastructure complexity."
+            body={
+              <p>
+                Each service starts with the system you already have. The work
+                can be focused on one integration or span architecture,
+                implementation and operational readiness.
+              </p>
+            }
+          />
+          <ServicePaths />
+        </Container>
+      </section>
 
-              <a
-                href="https://calendly.com/vladislav-usichenko/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-card"
-              >
-                <span className="contact-card-icon">📅</span>
-                <div>
-                  <div className="contact-card-lbl">Book a Call</div>
-                  <div className="contact-card-val">calendly.com/vladislav-usichenko/30min</div>
-                </div>
-              </a>
+      <section className="home-section">
+        <Container>
+          <div className="home-two-column home-two-column--problem">
+            <SectionIntro
+              eyebrow="What gets difficult in production"
+              title="The transaction is only one part of the system."
+              body={
+                <p>
+                  Products become difficult to operate when different systems
+                  can describe the same payment, asset or permission in
+                  different ways. The engineering problem is deciding which
+                  state matters, how it changes and what happens when systems
+                  disagree.
+                </p>
+              }
+            />
+            <EngineeringProblems />
+          </div>
+        </Container>
+      </section>
 
-              <a href="mailto:vladyslav.usichenko@aztra.tech" className="contact-card">
-                <span className="contact-card-icon">✉️</span>
-                <div>
-                  <div className="contact-card-lbl">Email</div>
-                  <div className="contact-card-val">vladyslav.usichenko@aztra.tech</div>
-                </div>
-              </a>
+      <section className="home-section home-section--surface">
+        <Container>
+          <SectionIntro
+            eyebrow="System-level architecture"
+            title="Keep product state, integrations and operations coordinated."
+            body={
+              <p>
+                A useful architecture makes boundaries explicit. Product logic
+                should not depend on terminology from every provider, and an
+                external success response should not silently become the only
+                record of what happened.
+              </p>
+            }
+          />
+          <SystemCoordinationModel />
+        </Container>
+      </section>
 
-              <a
-                href="https://t.me/aztratech"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-card"
-              >
-                <span className="contact-card-icon">💬</span>
-                <div>
-                  <div className="contact-card-lbl">Telegram</div>
-                  <div className="contact-card-val">@aztratech</div>
-                </div>
-              </a>
-
-              <a
-                href="https://www.linkedin.com/company/aztratech-company/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-card"
-              >
-                <span className="contact-card-icon">🔗</span>
-                <div>
-                  <div className="contact-card-lbl">LinkedIn</div>
-                  <div className="contact-card-val">linkedin.com/company/aztratech-company</div>
-                </div>
-              </a>
-
+      <section className="home-section">
+        <Container>
+          <div className="home-two-column home-two-column--artifact">
+            <div>
+              <SectionIntro
+                eyebrow="What the client gets"
+                title="Decisions that can be implemented, reviewed and operated."
+                body={
+                  <p>
+                    The output depends on the scope. Architecture work should
+                    still leave the team with concrete decisions, boundaries
+                    and unresolved questions, not a deck of generic advice.
+                  </p>
+                }
+              />
+              <div className="home-artifact-copy">
+                <p>
+                  We use lightweight technical artifacts to make important
+                  decisions visible to engineering, product and operations.
+                  These are working materials, not decorative deliverables.
+                </p>
+              </div>
             </div>
-            <div className="contact-cta">
-              <a
-                href="https://calendly.com/vladislav-usichenko/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-              >
-                Schedule Discovery Call
-              </a>
+            <ArchitectureDecisionPack />
+          </div>
+        </Container>
+      </section>
+
+      <section className="home-section home-section--surface">
+        <Container>
+          <SectionIntro
+            eyebrow="How an engagement starts"
+            title="Start with what still needs a decision."
+            body={
+              <p>
+                The first useful step depends on how much is already known.
+                Discovery is not a disguised build proposal, and delivery does
+                not need to restart work the team has already done.
+              </p>
+            }
+          />
+          <EngagementStart />
+          <div className="home-section__link-row">
+            <ButtonLink href={siteConfig.routes.howWeWork} variant="ghost">
+              See how we work
+            </ButtonLink>
+          </div>
+        </Container>
+      </section>
+
+      <section className="home-section home-responsibility">
+        <Container>
+          <SectionIntro
+            eyebrow="Responsibility"
+            title="Clear ownership matters before delivery starts."
+          />
+          <div className="responsibility-grid">
+            <article className="responsibility-card">
+              <p className="responsibility-card__label">AztraTech owns</p>
+              <h3>The technical outcome inside the agreed scope.</h3>
+              <p>
+                Architecture, implementation, integration behavior, technical
+                controls and engineering decisions defined in the engagement.
+              </p>
+            </article>
+            <article className="responsibility-card">
+              <p className="responsibility-card__label">Client and specialists own</p>
+              <h3>The business outcome and authoritative legal interpretation.</h3>
+              <p>
+                Product economics, commercial decisions and legal or regulatory
+                conclusions remain with the client and its qualified advisers.
+              </p>
+            </article>
+          </div>
+        </Container>
+      </section>
+
+      <section className="home-section home-section--surface">
+        <Container>
+          <div className="home-section-heading-row">
+            <SectionIntro
+              eyebrow="Insights"
+              title="Technical notes from the problems we work on."
+              body={
+                <p>
+                  Practical writing on payment state, tokenized asset lifecycles
+                  and security architecture.
+                </p>
+              }
+            />
+            <ButtonLink href={siteConfig.routes.insights} variant="ghost">
+              View insights
+            </ButtonLink>
+          </div>
+          <div className="insight-preview-grid">
+            {insightTopics.map((item) => (
+              <article className="insight-preview" key={item.title}>
+                <p>{item.category}</p>
+                <h3>{item.title}</h3>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="home-section">
+        <Container>
+          <div className="home-two-column home-two-column--faq">
+            <SectionIntro
+              eyebrow="FAQ"
+              title="A few things that are useful to settle early."
+            />
+            <div className="faq-list">
+              {faqItems.map((item) => (
+                <details className="faq-item" key={item.question}>
+                  <summary>{item.question}</summary>
+                  <p>{item.answer}</p>
+                </details>
+              ))}
             </div>
           </div>
-        </section>
+        </Container>
+      </section>
 
-      </main>
-
-    </>
-  )
+      <CTASection
+        heading="Bring the technical problem."
+        body="A 30-minute conversation is enough to understand the current state, what is blocked and whether there is a useful next step."
+        primaryLabel="Book a 30-minute discovery call"
+        primaryHref={siteConfig.calendlyUrl}
+        secondaryLabel="How we work"
+        secondaryHref={siteConfig.routes.howWeWork}
+      />
+    </main>
+  );
 }
