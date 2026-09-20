@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "../../../lib/site-config";
 import ButtonLink from "../ui/ButtonLink";
@@ -11,7 +12,13 @@ export default function SiteHeader() {
       <Container variant="wide">
         <div className="site-header__inner">
           <Link href={siteConfig.routes.home} className="site-header__logo">
-            <img src="/brand/logo-horizontal.svg" alt="AztraTech" />
+            <Image
+              src="/brand/logo-horizontal.svg"
+              alt="AztraTech"
+              width={2037}
+              height={659}
+              priority
+            />
           </Link>
 
           <nav className="desktop-navigation" aria-label="Primary navigation">

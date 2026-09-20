@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "../../../lib/site-config";
 import Container from "../ui/Container";
@@ -9,7 +10,12 @@ export default function SiteFooter() {
         <div className="site-footer__grid">
           <div className="site-footer__brand">
             <Link href={siteConfig.routes.home} className="site-footer__logo">
-              <img src="/brand/logo-horizontal.svg" alt="AztraTech" />
+              <Image
+                src="/brand/logo-horizontal.svg"
+                alt="AztraTech"
+                width={2037}
+                height={659}
+              />
             </Link>
             <p>
               Web3 and fintech engineering for stablecoin payments, tokenized
