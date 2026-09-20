@@ -7,6 +7,21 @@ import CTASection from "../../components/ui/CTASection";
 import Container from "../../components/ui/Container";
 import SectionIntro from "../../components/ui/SectionIntro";
 import { siteConfig } from "../../../lib/site-config";
+import JsonLd from "../../components/seo/JsonLd";
+import { buildBreadcrumbJsonLd, buildMetadata } from "../../../lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Stablecoin Payment Rails Engineering | AztraTech",
+  description:
+    "Design and build stablecoin payment rails with clear payment state, provider boundaries, settlement, reconciliation and treasury workflows.",
+  path: "/services/stablecoin-payment-rails",
+});
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Services", path: "/services" },
+  { name: "Stablecoin Payment Rails", path: "/services/stablecoin-payment-rails" },
+]);
 
 const integrationProblems = [
   {
@@ -32,6 +47,7 @@ const providerBoundaryItems = [
 export default function StablecoinPaymentRailsPage() {
   return (
     <main id="main-content" className="service-detail-page">
+      <JsonLd data={breadcrumbJsonLd} />
       <ServicePageHero
         eyebrow="Stablecoin Payment Rails"
         title="Add stablecoin payments without rebuilding your operations around every new provider."

@@ -2,6 +2,20 @@ import ButtonLink from "../components/ui/ButtonLink";
 import Container from "../components/ui/Container";
 import SectionIntro from "../components/ui/SectionIntro";
 import { siteConfig } from "../../lib/site-config";
+import JsonLd from "../components/seo/JsonLd";
+import { buildBreadcrumbJsonLd, buildMetadata } from "../../lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Contact AztraTech | Web3 & Fintech Engineering",
+  description:
+    "Discuss a Web3 or fintech infrastructure problem with AztraTech, including stablecoin payments, tokenized assets, security and system architecture.",
+  path: "/contact",
+});
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Contact", path: "/contact" },
+]);
 
 const conversationPoints = [
   ["01", "Context", "What the product does and where this technical problem sits in the wider system."],
@@ -20,6 +34,7 @@ const usefulContext = [
 export default function ContactPage() {
   return (
     <main id="main-content" className="supporting-page contact-page">
+      <JsonLd data={breadcrumbJsonLd} />
       <section className="supporting-hero supporting-hero--contact">
         <Container variant="wide">
           <div className="contact-hero__grid">

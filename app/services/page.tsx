@@ -5,6 +5,20 @@ import CTASection from "../components/ui/CTASection";
 import Container from "../components/ui/Container";
 import SectionIntro from "../components/ui/SectionIntro";
 import { siteConfig } from "../../lib/site-config";
+import JsonLd from "../components/seo/JsonLd";
+import { buildBreadcrumbJsonLd, buildMetadata } from "../../lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Web3 & Fintech Engineering Services | AztraTech",
+  description:
+    "Engineering services for stablecoin payment rails, RWA tokenization and Web3 security, scoped around the system, integrations and operational requirements.",
+  path: "/services",
+});
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Services", path: "/services" },
+]);
 
 const technologyAreas = [
   {
@@ -28,6 +42,7 @@ const technologyAreas = [
 export default function ServicesPage() {
   return (
     <main id="main-content" className="service-index-page">
+      <JsonLd data={breadcrumbJsonLd} />
       <section className="service-index-hero">
         <Container variant="wide">
           <div className="service-index-hero__grid">

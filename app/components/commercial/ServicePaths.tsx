@@ -20,11 +20,11 @@ const services = [
   },
   {
     index: "03",
-    title: "Security Engineering",
+    title: "Web3 Security Engineering",
     body:
-      "Threat modeling, security architecture, release controls, remediation and technical readiness.",
+      "Security-by-design, threat modeling, security architecture, release controls, remediation and technical readiness.",
     href: siteConfig.routes.security,
-    linkLabel: "Explore Security Engineering",
+    linkLabel: "Explore Web3 Security Engineering",
   },
 ] as const;
 

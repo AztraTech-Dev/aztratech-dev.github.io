@@ -23,20 +23,23 @@ export const siteConfig = {
   services: [
     {
       label: "Stablecoin Payment Rails",
+      navLabel: "Stablecoin Payment Rails",
       description:
         "Payment architecture, provider integrations, reconciliation and treasury workflows.",
       href: "/services/stablecoin-payment-rails",
     },
     {
       label: "RWA Tokenization",
+      navLabel: "RWA Tokenization",
       description:
         "Infrastructure for tokenized assets, ownership, transfer controls and the asset lifecycle.",
       href: "/services/rwa-tokenization",
     },
     {
-      label: "Security Engineering",
+      label: "Web3 Security Engineering",
+      navLabel: "Security",
       description:
-        "Security architecture, threat modeling, remediation and technical readiness.",
+        "Security-by-design, threat modeling, remediation and technical readiness.",
       href: "/services/security-engineering",
     },
   ],

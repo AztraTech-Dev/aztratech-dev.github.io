@@ -7,6 +7,21 @@ import CTASection from "../../components/ui/CTASection";
 import Container from "../../components/ui/Container";
 import SectionIntro from "../../components/ui/SectionIntro";
 import { siteConfig } from "../../../lib/site-config";
+import JsonLd from "../../components/seo/JsonLd";
+import { buildBreadcrumbJsonLd, buildMetadata } from "../../../lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Web3 Security Engineering | AztraTech",
+  description:
+    "Web3 security engineering with security-by-design across architecture, threat modeling, secure delivery, remediation and external review readiness.",
+  path: "/services/security-engineering",
+});
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Services", path: "/services" },
+  { name: "Web3 Security Engineering", path: "/services/security-engineering" },
+]);
 
 const architectureRisks = [
   {
@@ -33,10 +48,11 @@ const developmentControls = [
 export default function SecurityEngineeringPage() {
   return (
     <main id="main-content" className="service-detail-page">
+      <JsonLd data={breadcrumbJsonLd} />
       <ServicePageHero
-        eyebrow="Security Engineering"
+        eyebrow="Web3 Security"
         title="Build security into the system before it becomes a release problem."
-        lead="Security work is more useful when architecture, trust boundaries, privileged paths and operational controls are considered before the final review. AztraTech works inside the engineering lifecycle to make those decisions concrete."
+        lead="Security-by-design for Web3 and fintech systems means treating architecture, trust boundaries, privileged paths and operational controls as engineering decisions before the final review. AztraTech works inside the delivery lifecycle to make those decisions concrete."
         signals={["Security architecture", "Threat modeling", "Secure delivery", "Remediation & readiness"]}
       />
 

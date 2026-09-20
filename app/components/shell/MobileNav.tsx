@@ -37,7 +37,7 @@ export default function MobileNav() {
           <div className="mobile-navigation__service-links">
             {siteConfig.services.map((service) => (
               <Link key={service.href} href={service.href} onClick={close}>
-                {service.label}
+                {service.navLabel}
               </Link>
             ))}
             <Link href={siteConfig.routes.services} onClick={close}>

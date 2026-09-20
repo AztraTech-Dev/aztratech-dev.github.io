@@ -3,6 +3,20 @@ import CTASection from "../components/ui/CTASection";
 import Container from "../components/ui/Container";
 import SectionIntro from "../components/ui/SectionIntro";
 import { siteConfig } from "../../lib/site-config";
+import JsonLd from "../components/seo/JsonLd";
+import { buildBreadcrumbJsonLd, buildMetadata } from "../../lib/seo";
+
+export const metadata = buildMetadata({
+  title: "About AztraTech | Web3 & Fintech Infrastructure Engineering",
+  description:
+    "AztraTech is a technical partner for Web3 and fintech infrastructure, working across stablecoin payments, RWA tokenization and Web3 security engineering.",
+  path: "/about",
+});
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+]);
 
 const principles = [
   ["01", "System before feature", "A feature can work in isolation and still fail inside the complete operating system. We design around the system that has to run after the demo."],
@@ -20,6 +34,7 @@ const operatingModel = [
 export default function AboutPage() {
   return (
     <main id="main-content" className="supporting-page">
+      <JsonLd data={breadcrumbJsonLd} />
       <section className="supporting-hero supporting-hero--about">
         <Container variant="wide">
           <div className="supporting-hero__grid">
@@ -72,7 +87,7 @@ export default function AboutPage() {
 
       <section className="supporting-section">
         <Container>
-          <SectionIntro eyebrow="Operating model" title="Scope determines the expertise around the engagement." body={<p>AztraTech operates with a small accountable core and brings in vetted specialists and partners around the technical scope of each engagement.</p>} />
+          <SectionIntro eyebrow="Operating model" title="Scope determines the expertise around the engagement." body={<p>AztraTech can work as a focused delivery partner or in a CTO-as-a-Service model. A small accountable core brings in vetted specialists and partners around the technical scope of each engagement.</p>} />
           <div className="operating-model-grid">
             {operatingModel.map(([label, title, body]) => (
               <article className="operating-model-card" key={label}>

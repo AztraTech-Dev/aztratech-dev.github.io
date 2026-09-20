@@ -4,6 +4,29 @@ import ArticleSources from "../../components/editorial/ArticleSources";
 import AssetLifecycleModel from "../../components/diagrams/AssetLifecycleModel";
 import Container from "../../components/ui/Container";
 import { siteConfig } from "../../../lib/site-config";
+import JsonLd from "../../components/seo/JsonLd";
+import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildMetadata } from "../../../lib/seo";
+
+export const metadata = buildMetadata({
+  title: "RWA Tokenization: Asset Lifecycle & Ownership | AztraTech",
+  description:
+    "Why token issuance is only one part of an RWA product, with eligibility, ownership, transfer controls, servicing and redemption across the lifecycle.",
+  path: "/insights/rwa-tokenization-asset-lifecycle",
+  openGraphType: "article",
+});
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Insights", path: "/insights" },
+  { name: "RWA Tokenization: Asset Lifecycle & Ownership", path: "/insights/rwa-tokenization-asset-lifecycle" },
+]);
+
+const articleJsonLd = buildArticleJsonLd({
+  headline: "Token Issuance Is One Event. The Asset Lifecycle Is the System.",
+  description:
+    "Why token issuance is only one part of an RWA product, with eligibility, ownership, transfer controls, servicing and redemption across the lifecycle.",
+  path: "/insights/rwa-tokenization-asset-lifecycle",
+});
 
 const sources = [
   {
@@ -21,6 +44,8 @@ const sources = [
 export default function RwaAssetLifecycleArticle() {
   return (
     <main id="main-content" className="article-page">
+      <JsonLd data={breadcrumbJsonLd} />
+      <JsonLd data={articleJsonLd} />
       <ArticleHeader
         category="RWA & Tokenization"
         title="Token Issuance Is One Event. The Asset Lifecycle Is the System."

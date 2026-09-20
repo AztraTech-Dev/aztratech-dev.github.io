@@ -9,6 +9,15 @@ import CTASection from "./components/ui/CTASection";
 import Container from "./components/ui/Container";
 import SectionIntro from "./components/ui/SectionIntro";
 import { siteConfig } from "../lib/site-config";
+import JsonLd from "./components/seo/JsonLd";
+import { buildMetadata, homeJsonLd } from "../lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Web3 & Fintech Infrastructure Engineering | AztraTech",
+  description:
+    "AztraTech designs and builds infrastructure for stablecoin payments, RWA tokenization and Web3 security engineering across fintech products.",
+  path: "/",
+});
 
 const insightTopics = [
   {
@@ -20,7 +29,7 @@ const insightTopics = [
     title: "Token Issuance Is One Event. The Asset Lifecycle Is the System.",
   },
   {
-    category: "Security Engineering",
+    category: "Web3 Security",
     title:
       "Why Enterprise Security Reviews Expose Architecture Problems, Not Just Missing Documents",
   },
@@ -52,6 +61,7 @@ const faqItems = [
 export default function Home() {
   return (
     <main id="main-content" className="home-page">
+      <JsonLd data={homeJsonLd} />
       <section className="home-hero">
         <Container variant="wide">
           <div className="home-hero__grid">

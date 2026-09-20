@@ -1,4 +1,13 @@
 import Container from "../components/ui/Container";
+import { buildMetadata } from "../../lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Privacy Notice | AztraTech",
+  description:
+    "Pre-launch data notice for the AztraTech website. This page is not intended to replace the final production privacy policy.",
+  path: "/privacy",
+  index: false,
+});
 
 const currentDataPoints = [
   ["Static website", "The current Website V2 build is designed as a static site. It does not add a custom contact form or newsletter in this batch."],

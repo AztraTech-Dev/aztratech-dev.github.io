@@ -4,6 +4,29 @@ import ArticleSources from "../../components/editorial/ArticleSources";
 import PaymentStateModel from "../../components/diagrams/PaymentStateModel";
 import Container from "../../components/ui/Container";
 import { siteConfig } from "../../../lib/site-config";
+import JsonLd from "../../components/seo/JsonLd";
+import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildMetadata } from "../../../lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Stablecoin Payment State & Reconciliation | AztraTech",
+  description:
+    "Why a confirmed stablecoin transfer can still leave payment state unresolved, and how canonical records, provider boundaries and reconciliation help.",
+  path: "/insights/stablecoin-payment-state-reconciliation",
+  openGraphType: "article",
+});
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Insights", path: "/insights" },
+  { name: "Stablecoin Payment State & Reconciliation", path: "/insights/stablecoin-payment-state-reconciliation" },
+]);
+
+const articleJsonLd = buildArticleJsonLd({
+  headline: "When a Stablecoin Transfer Works but the Payment Still Doesn't",
+  description:
+    "Why a confirmed stablecoin transfer can still leave payment state unresolved, and how canonical records, provider boundaries and reconciliation help.",
+  path: "/insights/stablecoin-payment-state-reconciliation",
+});
 
 const sources = [
   {
@@ -21,6 +44,8 @@ const sources = [
 export default function StablecoinPaymentStateArticle() {
   return (
     <main id="main-content" className="article-page">
+      <JsonLd data={breadcrumbJsonLd} />
+      <JsonLd data={articleJsonLd} />
       <ArticleHeader
         category="Stablecoin Payments"
         title="When a Stablecoin Transfer Works but the Payment Still Doesn't"

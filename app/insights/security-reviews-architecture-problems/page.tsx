@@ -4,6 +4,29 @@ import ArticleSources from "../../components/editorial/ArticleSources";
 import ControlImplementationEvidence from "../../components/diagrams/ControlImplementationEvidence";
 import Container from "../../components/ui/Container";
 import { siteConfig } from "../../../lib/site-config";
+import JsonLd from "../../components/seo/JsonLd";
+import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildMetadata } from "../../../lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Enterprise Security Reviews & Architecture | AztraTech",
+  description:
+    "Why enterprise security reviews often expose architecture, trust-boundary and control problems that documentation alone cannot resolve.",
+  path: "/insights/security-reviews-architecture-problems",
+  openGraphType: "article",
+});
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Insights", path: "/insights" },
+  { name: "Enterprise Security Reviews & Architecture", path: "/insights/security-reviews-architecture-problems" },
+]);
+
+const articleJsonLd = buildArticleJsonLd({
+  headline: "Why Enterprise Security Reviews Expose Architecture Problems, Not Just Missing Documents",
+  description:
+    "Why enterprise security reviews often expose architecture, trust-boundary and control problems that documentation alone cannot resolve.",
+  path: "/insights/security-reviews-architecture-problems",
+});
 
 const sources = [
   {
@@ -31,8 +54,10 @@ const sources = [
 export default function SecurityArchitectureReviewArticle() {
   return (
     <main id="main-content" className="article-page">
+      <JsonLd data={breadcrumbJsonLd} />
+      <JsonLd data={articleJsonLd} />
       <ArticleHeader
-        category="Security Engineering"
+        category="Web3 Security"
         title="Why Enterprise Security Reviews Expose Architecture Problems, Not Just Missing Documents"
         lead="A late security review often finds issues that cannot be fixed by writing another policy. The missing evidence is sometimes a symptom of a system boundary that was never made explicit."
       />
@@ -114,11 +139,11 @@ export default function SecurityArchitectureReviewArticle() {
           </section>
 
           <ArticleServiceBridge
-            eyebrow="Security Engineering"
+            eyebrow="Web3 Security"
             title="Make the review a verification step, not the first architecture conversation."
             body="AztraTech can work on security architecture, threat modeling, remediation, release controls and technical readiness inside the engineering lifecycle."
             serviceHref={siteConfig.routes.security}
-            serviceLabel="View Security Engineering"
+            serviceLabel="View Web3 Security Engineering"
             callHref={siteConfig.calendlyUrl}
           />
 

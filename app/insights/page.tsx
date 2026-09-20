@@ -2,6 +2,20 @@ import Link from "next/link";
 import Container from "../components/ui/Container";
 import CTASection from "../components/ui/CTASection";
 import { siteConfig } from "../../lib/site-config";
+import JsonLd from "../components/seo/JsonLd";
+import { buildBreadcrumbJsonLd, buildMetadata } from "../../lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Web3 & Fintech Infrastructure Insights | AztraTech",
+  description:
+    "Technical notes from AztraTech on stablecoin payment state, tokenized asset lifecycles, Web3 security, integrations, controls and operations.",
+  path: "/insights",
+});
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Insights", path: "/insights" },
+]);
 
 const articles = [
   {
@@ -19,7 +33,7 @@ const articles = [
     href: "/insights/rwa-tokenization-asset-lifecycle",
   },
   {
-    category: "Security Engineering",
+    category: "Web3 Security",
     title: "Why Enterprise Security Reviews Expose Architecture Problems, Not Just Missing Documents",
     summary:
       "Late reviews frequently surface unclear trust boundaries, privileged paths and control ownership that documentation alone cannot fix.",
@@ -30,6 +44,7 @@ const articles = [
 export default function InsightsPage() {
   return (
     <main id="main-content" className="insights-index-page">
+      <JsonLd data={breadcrumbJsonLd} />
       <section className="insights-index-hero">
         <Container variant="wide">
           <div className="insights-index-hero__grid">

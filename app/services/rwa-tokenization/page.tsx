@@ -7,6 +7,21 @@ import CTASection from "../../components/ui/CTASection";
 import Container from "../../components/ui/Container";
 import SectionIntro from "../../components/ui/SectionIntro";
 import { siteConfig } from "../../../lib/site-config";
+import JsonLd from "../../components/seo/JsonLd";
+import { buildBreadcrumbJsonLd, buildMetadata } from "../../../lib/seo";
+
+export const metadata = buildMetadata({
+  title: "RWA Tokenization Engineering | AztraTech",
+  description:
+    "Engineering for tokenized asset products across investor eligibility, ownership state, transfer controls, servicing, redemption and system boundaries.",
+  path: "/services/rwa-tokenization",
+});
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Services", path: "/services" },
+  { name: "RWA Tokenization", path: "/services/rwa-tokenization" },
+]);
 
 const transferChecks = [
   {
@@ -26,6 +41,7 @@ const transferChecks = [
 export default function RwaTokenizationPage() {
   return (
     <main id="main-content" className="service-detail-page">
+      <JsonLd data={breadcrumbJsonLd} />
       <ServicePageHero
         eyebrow="RWA Tokenization"
         title="Build a tokenized asset product that can operate after issuance."

@@ -29,7 +29,7 @@ export default function ServicesDropdown() {
             href={service.href}
             className="services-dropdown__item"
           >
-            <span className="services-dropdown__label">{service.label}</span>
+            <span className="services-dropdown__label">{service.navLabel}</span>
             <span className="services-dropdown__description">
               {service.description}
             </span>

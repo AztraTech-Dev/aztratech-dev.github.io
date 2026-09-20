@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import SiteFooter from "./components/shell/SiteFooter";
 import SiteHeader from "./components/shell/SiteHeader";
+import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, DEFAULT_TITLE } from "../lib/seo";
+import { siteConfig } from "../lib/site-config";
 import "./globals.css";
 
 const inter = Inter({
@@ -11,20 +13,31 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aztra.tech"),
-  title: "AztraTech | Production-Ready Web3 Infrastructure",
-  description:
-    "AztraTech builds production-grade Web3 infrastructure | stablecoin payment rails, RWA tokenization, and security engineering for fintech and blockchain companies.",
+  metadataBase: new URL(siteConfig.siteUrl),
+  applicationName: siteConfig.name,
+  title: {
+    default: DEFAULT_TITLE,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: DEFAULT_DESCRIPTION,
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: "AztraTech | Production-Ready Web3 Infrastructure",
-    description:
-      "We build the boring-but-critical layer that makes Web3 products survive enterprise pilots, regulatory reviews, and scale.",
-    url: "https://aztra.tech",
-    images: [{ url: "/og-image.png", width: 1128, height: 191 }],
+    type: "website",
+    locale: "en_US",
+    siteName: siteConfig.name,
+    url: siteConfig.siteUrl,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/og-image.png"],
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE.url],
   },
 };
 

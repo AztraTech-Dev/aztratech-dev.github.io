@@ -5,6 +5,20 @@ import CTASection from "../components/ui/CTASection";
 import Container from "../components/ui/Container";
 import SectionIntro from "../components/ui/SectionIntro";
 import { siteConfig } from "../../lib/site-config";
+import JsonLd from "../components/seo/JsonLd";
+import { buildBreadcrumbJsonLd, buildMetadata } from "../../lib/seo";
+
+export const metadata = buildMetadata({
+  title: "How We Work | AztraTech",
+  description:
+    "How AztraTech structures discovery, architecture, technical delivery, CTO-as-a-Service and continued engineering around the decisions still open.",
+  path: "/how-we-work",
+});
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "How We Work", path: "/how-we-work" },
+]);
 
 const entryPaths = [
   {
@@ -54,6 +68,7 @@ const responsibilities = [
 export default function HowWeWorkPage() {
   return (
     <main id="main-content" className="supporting-page how-we-work-page">
+      <JsonLd data={breadcrumbJsonLd} />
       <section className="supporting-hero supporting-hero--how-we-work">
         <Container variant="wide">
           <div className="supporting-hero__grid">
@@ -96,6 +111,10 @@ export default function HowWeWorkPage() {
                 <p>{path.body}</p>
               </article>
             ))}
+          </div>
+          <div className="continuity-note">
+            <span>CTO-AS-A-SERVICE</span>
+            <p>For teams that need senior technical ownership without building the entire function in-house, AztraTech can work in a CTO-as-a-Service model across architecture, technical decisions, delivery planning and engineering coordination.</p>
           </div>
         </Container>
       </section>
