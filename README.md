@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AztraTech Website V2
 
-## Getting Started
+Production website for AztraTech, a technical partner focused on Web3 and fintech infrastructure.
 
-First, run the development server:
+Production:
+https://aztra.tech
+
+## Core Areas
+
+- Stablecoin Payment Rails
+- RWA Tokenization
+- Web3 Security Engineering
+
+## Technology
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Static export
+- GitHub Pages
+- GitHub Actions
+
+## Local Development
+
+Requirements:
+- Node.js 20+
+- npm
+
+Commands:
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Local development URL: http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Quality Gates
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run copy:check` — validates public-copy constraints
+- `npm run lint` — runs ESLint
+- `npm run build` — creates the static Next.js export
+- `npm run site:check` — validates the generated static output
+- `npm audit` — checks dependency vulnerabilities
 
-## Learn More
+## Production Build
 
-To learn more about Next.js, take a look at the following resources:
+`next.config.ts` uses static export. Production output is generated into:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+out/
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This output is static and is served directly by GitHub Pages; it does not run on a Node server.
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Production branch: `main`
+- A push to `main` triggers `.github/workflows/deploy.yml`
+- The workflow runs, in order:
+  - `npm ci`
+  - `npm run copy:check`
+  - `npm run lint`
+  - `npm run build`
+  - `npm run site:check`
+- The resulting `./out` directory is uploaded and deployed through GitHub Pages
+- Production custom domain: https://aztra.tech
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## SEO & Indexing
+
+- Robots: https://aztra.tech/robots.txt
+- Sitemap: https://aztra.tech/sitemap.xml
+- A Google Search Console Domain property is configured for aztra.tech
+- The sitemap is submitted to Search Console
+- The Privacy page intentionally uses `noindex, follow`
+
+## Privacy & Measurement
+
+The production site currently does not add:
+- website analytics
+- advertising pixels
+- marketing cookies
+- embedded CRM forms
+- newsletter tracking
+
+External services such as GitHub Pages and Calendly operate under their own policies.
+
+Any future analytics, CRM, tracking, or embedded form integration must be reviewed together with the Privacy Notice before release.
+
+## Repository Notes
+
+- Public website language is English.
+- Core production changes should pass all quality gates before being merged to `main`.
+- Do not publish unsupported client claims, performance figures, certifications, or operational capabilities.
+- Technical diagrams and artifacts that are not client evidence are labelled as illustrative examples.
