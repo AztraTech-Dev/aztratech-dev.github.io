@@ -57,6 +57,11 @@ export default function PaymentInfrastructureArchitecture() {
           ))}
         </div>
       </div>
+
+      <p className="service-diagram__note">
+        Provider-specific behavior stays at the integration boundary instead of
+        leaking into product logic.
+      </p>
     </figure>
   );
 }

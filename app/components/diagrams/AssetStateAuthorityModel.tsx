@@ -22,6 +22,10 @@ export default function AssetStateAuthorityModel() {
           {offchain.map((item) => <p key={item}>{item}</p>)}
         </section>
       </div>
+      <p className="service-diagram__note">
+        The authoritative record depends on the decision being made. No single
+        layer is assumed to answer every ownership or servicing question.
+      </p>
     </figure>
   );
 }

@@ -14,7 +14,7 @@ export default function ArchitectureDiagnosticOutput() {
           <span>ILLUSTRATIVE EXAMPLE</span>
           <strong>Architecture Diagnostic Output</strong>
         </div>
-        <span className="diagnostic-output__status">WORKING MATERIAL</span>
+        <span className="diagnostic-output__status">DIAGNOSTIC</span>
       </div>
       <div className="diagnostic-output__body">
         {outputs.map(([index, title, body]) => (
@@ -28,8 +28,8 @@ export default function ArchitectureDiagnosticOutput() {
         ))}
       </div>
       <div className="diagnostic-output__footer">
-        <span>Scope follows the decision</span>
-        <span>Not a case study</span>
+        <span>TECHNICAL WORKING MATERIAL</span>
+        <span>DIAGNOSTIC OUTPUT</span>
       </div>
     </aside>
   );

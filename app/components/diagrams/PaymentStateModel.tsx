@@ -9,6 +9,7 @@ export default function PaymentStateModel() {
   return (
     <figure className="service-diagram payment-state-model" aria-labelledby="payment-state-title">
       <figcaption id="payment-state-title">One payment. Several states.</figcaption>
+      <span className="service-diagram__example-label">ILLUSTRATIVE STATE SNAPSHOT</span>
       <div className="payment-state-model__flow">
         {states.map(([system, state], index) => (
           <div className="payment-state-model__node" key={system}>
@@ -25,6 +26,10 @@ export default function PaymentStateModel() {
         <strong>REQUIRED</strong>
         <p>The system still needs a deliberate answer when the records disagree.</p>
       </div>
+      <p className="service-diagram__note">
+        The states are illustrative. Provider terminology and settlement semantics
+        vary by integration.
+      </p>
     </figure>
   );
 }

@@ -13,7 +13,7 @@ export default function PaymentStateReconciliationSpec() {
           <span>ILLUSTRATIVE EXAMPLE</span>
           <figcaption id="payment-spec-title">Payment State & Reconciliation Specification</figcaption>
         </div>
-        <span className="service-artifact__mark">AT</span>
+        <span className="service-artifact__meta">SCOPE-SPECIFIC</span>
       </div>
       <div className="service-artifact__rows">
         {rows.map(([title, body], index) => (
@@ -25,7 +25,7 @@ export default function PaymentStateReconciliationSpec() {
       </div>
       <div className="service-artifact__footer">
         <span>TECHNICAL WORKING MATERIAL</span>
-        <span>SCOPE-SPECIFIC</span>
+        <span>PAYMENT STATE & RECONCILIATION</span>
       </div>
     </figure>
   );

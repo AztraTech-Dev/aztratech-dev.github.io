@@ -14,12 +14,6 @@ export default function InfrastructureSystemMap() {
             <small>Value, ownership, settlement state</small>
           </div>
 
-          <div className="map-node map-node--left">
-            <span className="map-node__meta">EXTERNAL</span>
-            <strong>External systems</strong>
-            <small>Providers, banks, custody, chains</small>
-          </div>
-
           <div className="map-node map-node--center">
             <span className="map-node__meta">CLIENT</span>
             <strong>Client product</strong>
@@ -39,13 +33,24 @@ export default function InfrastructureSystemMap() {
           </div>
 
           <span className="map-connector map-connector--vertical" aria-hidden="true" />
-          <span className="map-connector map-connector--horizontal" aria-hidden="true" />
+          <span className="map-connector map-connector--controls" aria-hidden="true" />
         </div>
       </div>
 
+      <span className="infrastructure-map__external-link" aria-hidden="true" />
+
+      <div className="infrastructure-map__external-boundary">
+        <span>EXTERNAL INFRASTRUCTURE</span>
+        <strong>Providers, banks, custody and networks</strong>
+        <small>
+          External dependencies stay outside the product boundary even when the
+          product coordinates their state.
+        </small>
+      </div>
+
       <p className="infrastructure-map__note">
-        The product coordinates the system. AztraTech designs and builds the
-        infrastructure around those boundaries.
+        The client product coordinates internal state, controls and operations
+        while integrations connect that system to external infrastructure.
       </p>
     </figure>
   );

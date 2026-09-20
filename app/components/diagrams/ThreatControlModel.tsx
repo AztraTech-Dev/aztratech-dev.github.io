@@ -22,6 +22,10 @@ export default function ThreatControlModel() {
           <p>What prevents, limits, detects or recovers from that failure?</p>
         </div>
       </div>
+      <p className="service-diagram__note">
+        The model starts with the system and its trust boundaries, then ties
+        plausible failure paths to explicit controls.
+      </p>
     </figure>
   );
 }

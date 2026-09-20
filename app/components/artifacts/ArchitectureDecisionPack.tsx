@@ -1,8 +1,9 @@
 const items = [
-  ["01", "Current-state map", "Systems, actors and trust boundaries"],
-  ["02", "Decision register", "Chosen approaches and their tradeoffs"],
-  ["03", "Integration boundaries", "State ownership and provider contracts"],
-  ["04", "Open questions", "Risks that still need an explicit decision"],
+  ["01", "Target architecture", "System boundaries and the intended operating model"],
+  ["02", "State & control model", "Ownership, transitions, permissions and exception paths"],
+  ["03", "Integration contracts", "Provider boundaries, interfaces and failure behavior"],
+  ["04", "Decision register", "Chosen approaches, assumptions and explicit trade-offs"],
+  ["05", "Implementation backlog", "Sequenced engineering work required to move forward"],
 ] as const;
 
 export default function ArchitectureDecisionPack() {
@@ -15,7 +16,7 @@ export default function ArchitectureDecisionPack() {
             Architecture & Technical Decision Pack
           </figcaption>
         </div>
-        <span className="decision-pack__mark" aria-hidden="true">AT</span>
+        <span className="decision-pack__meta">SCOPE-SPECIFIC</span>
       </div>
 
       <div className="decision-pack__body">
@@ -32,7 +33,7 @@ export default function ArchitectureDecisionPack() {
 
       <div className="decision-pack__footer">
         <span>TECHNICAL WORKING MATERIAL</span>
-        <span>SCOPE-SPECIFIC</span>
+        <span>DELIVERY DECISION PACK</span>
       </div>
     </figure>
   );

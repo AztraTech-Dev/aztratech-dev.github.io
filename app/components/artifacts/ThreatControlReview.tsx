@@ -13,7 +13,7 @@ export default function ThreatControlReview() {
           <span>ILLUSTRATIVE EXAMPLE</span>
           <figcaption id="threat-review-title">Threat & Control Review</figcaption>
         </div>
-        <span className="service-artifact__mark">AT</span>
+        <span className="service-artifact__meta">SCOPE-SPECIFIC</span>
       </div>
       <div className="service-artifact__rows service-artifact__rows--flow">
         {rows.map(([title, body], index) => (
@@ -24,8 +24,8 @@ export default function ThreatControlReview() {
         ))}
       </div>
       <div className="service-artifact__footer">
-        <span>CONTROL TO EVIDENCE MODEL</span>
-        <span>SCOPE-SPECIFIC</span>
+        <span>TECHNICAL WORKING MATERIAL</span>
+        <span>THREAT & CONTROL REVIEW</span>
       </div>
     </figure>
   );

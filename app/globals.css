@@ -4280,3 +4280,190 @@ summary {
     margin-top: 26px;
   }
 }
+
+/* BATCH 6: TECHNICAL PROOF INTEGRATION */
+.infrastructure-map__network {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.9fr);
+  grid-template-rows: repeat(3, minmax(96px, auto));
+  min-height: 344px;
+}
+
+.map-node--top {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.map-node--center {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.map-node--right {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.map-node--bottom {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.map-connector--vertical {
+  top: 13%;
+  bottom: 13%;
+  left: 28.5%;
+}
+
+.map-connector--horizontal {
+  display: none;
+}
+
+.map-connector--controls {
+  top: 50%;
+  right: 19%;
+  left: 28.5%;
+  height: 1px;
+}
+
+.infrastructure-map__external-link {
+  display: block;
+  width: 1px;
+  height: 18px;
+  margin: 0 auto;
+  border-left: 1px dashed rgba(118, 130, 161, 0.58);
+}
+
+.infrastructure-map__external-boundary {
+  padding: 15px 17px;
+  border: 1px dashed rgba(118, 130, 161, 0.64);
+  border-radius: 8px;
+  background: rgba(1, 15, 46, 0.36);
+}
+
+.infrastructure-map__external-boundary > span,
+.service-diagram__example-label,
+.state-mismatch__label {
+  display: block;
+  color: var(--text-faint);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.infrastructure-map__external-boundary strong,
+.infrastructure-map__external-boundary small {
+  display: block;
+}
+
+.infrastructure-map__external-boundary strong {
+  margin-top: 7px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.infrastructure-map__external-boundary small {
+  margin-top: 5px;
+  color: var(--text-muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.coordination-layer--external {
+  border-style: dashed;
+  background: rgba(1, 15, 46, 0.34);
+}
+
+.state-mismatch__label {
+  grid-column: 1 / -1;
+  min-height: auto !important;
+  padding: 0 2px 2px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.service-diagram__example-label {
+  margin: -6px 0 14px;
+}
+
+.service-diagram__note {
+  margin-top: 16px;
+  padding: 13px 15px;
+  border-left: 2px solid var(--accent);
+  color: var(--text-muted);
+  background: rgba(13, 31, 74, 0.3);
+  font-size: 10.5px;
+  line-height: 1.6;
+}
+
+.decision-pack__meta,
+.service-artifact__meta {
+  display: inline-flex !important;
+  width: auto !important;
+  height: auto !important;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin: 0 !important;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--text-faint) !important;
+  background: rgba(1, 15, 46, 0.34);
+  font-size: 8px !important;
+  font-weight: 700;
+  letter-spacing: 0.1em !important;
+  line-height: 1.2;
+}
+
+@media (max-width: 700px) {
+  .infrastructure-map__network {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .map-node--top,
+  .map-node--center,
+  .map-node--right,
+  .map-node--bottom {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .map-node--center {
+    order: -1;
+  }
+
+  .map-connector--controls {
+    display: none;
+  }
+
+  .infrastructure-map__external-boundary {
+    padding: 14px;
+  }
+
+  .state-mismatch {
+    grid-template-columns: 1fr;
+  }
+
+  .state-mismatch__label,
+  .state-mismatch > p {
+    grid-column: 1;
+  }
+
+  .service-diagram__note {
+    padding: 12px 13px;
+  }
+
+  .decision-pack__header,
+  .service-artifact__header {
+    align-items: flex-start;
+  }
+
+  .decision-pack__meta,
+  .service-artifact__meta {
+    white-space: nowrap;
+  }
+}
+/* END BATCH 6: TECHNICAL PROOF INTEGRATION */

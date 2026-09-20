@@ -13,7 +13,12 @@ export default function SystemCoordinationModel() {
 
       <div className="coordination-model__layers">
         {layers.map(([title, body], index) => (
-          <div className="coordination-layer" key={title}>
+          <div
+            className={`coordination-layer${
+              title === "EXTERNAL INFRASTRUCTURE" ? " coordination-layer--external" : ""
+            }`}
+            key={title}
+          >
             <span className="coordination-layer__index">
               {String(index + 1).padStart(2, "0")}
             </span>
@@ -30,6 +35,7 @@ export default function SystemCoordinationModel() {
       </div>
 
       <div className="state-mismatch" aria-label="Illustrative state mismatch">
+        <span className="state-mismatch__label">ILLUSTRATIVE STATE MISMATCH</span>
         <div>
           <span>Internal state</span>
           <strong>SETTLED</strong>

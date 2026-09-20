@@ -13,7 +13,7 @@ export default function AssetLifecycleTransferControlModel() {
           <span>ILLUSTRATIVE EXAMPLE</span>
           <figcaption id="asset-control-title">Asset Lifecycle & Transfer Control Model</figcaption>
         </div>
-        <span className="service-artifact__mark">AT</span>
+        <span className="service-artifact__meta">SCOPE-SPECIFIC</span>
       </div>
       <div className="service-artifact__rows">
         {rows.map(([title, body], index) => (
@@ -25,7 +25,7 @@ export default function AssetLifecycleTransferControlModel() {
       </div>
       <div className="service-artifact__footer">
         <span>TECHNICAL WORKING MATERIAL</span>
-        <span>SCOPE-SPECIFIC</span>
+        <span>ASSET LIFECYCLE & TRANSFER CONTROL</span>
       </div>
     </figure>
   );

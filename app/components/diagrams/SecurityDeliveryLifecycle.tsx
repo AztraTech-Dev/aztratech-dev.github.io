@@ -17,6 +17,10 @@ export default function SecurityDeliveryLifecycle() {
       <div className="security-lifecycle__rails">
         {rails.map((rail) => <span key={rail}>{rail}</span>)}
       </div>
+      <p className="service-diagram__note">
+        Risk, controls and evidence cross the full delivery lifecycle. The release
+        gate is one decision point, not the start of security work.
+      </p>
     </figure>
   );
 }
