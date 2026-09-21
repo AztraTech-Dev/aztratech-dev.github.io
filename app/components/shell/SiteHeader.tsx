@@ -4,6 +4,7 @@ import { siteConfig } from "../../../lib/site-config";
 import ButtonLink from "../ui/ButtonLink";
 import Container from "../ui/Container";
 import MobileNav from "./MobileNav";
+import NavLink from "./NavLink";
 import ServicesDropdown from "./ServicesDropdown";
 
 export default function SiteHeader() {
@@ -23,9 +24,9 @@ export default function SiteHeader() {
 
           <nav className="desktop-navigation" aria-label="Primary navigation">
             <ServicesDropdown />
-            <Link href={siteConfig.routes.howWeWork}>How We Work</Link>
-            <Link href={siteConfig.routes.about}>About</Link>
-            <Link href={siteConfig.routes.insights}>Insights</Link>
+            <NavLink href={siteConfig.routes.howWeWork}>How We Work</NavLink>
+            <NavLink href={siteConfig.routes.about}>About</NavLink>
+            <NavLink href={siteConfig.routes.insights}>Insights</NavLink>
             <ButtonLink
               href={siteConfig.calendlyUrl}
               className="desktop-navigation__cta"

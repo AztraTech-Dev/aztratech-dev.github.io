@@ -26,6 +26,7 @@ export const siteConfig = {
       navLabel: "Stablecoin Payment Rails",
       description:
         "Payment architecture, provider integrations, reconciliation and treasury workflows.",
+      menuDescription: "Payments, settlement and reconciliation.",
       href: "/services/stablecoin-payment-rails",
     },
     {
@@ -33,6 +34,7 @@ export const siteConfig = {
       navLabel: "RWA Tokenization",
       description:
         "Infrastructure for tokenized assets, ownership, transfer controls and the asset lifecycle.",
+      menuDescription: "Asset lifecycle and controlled token states.",
       href: "/services/rwa-tokenization",
     },
     {
@@ -40,6 +42,7 @@ export const siteConfig = {
       navLabel: "Security",
       description:
         "Security-by-design, threat modeling, remediation and technical readiness.",
+      menuDescription: "Threat models, controls and secure delivery.",
       href: "/services/security-engineering",
     },
   ],

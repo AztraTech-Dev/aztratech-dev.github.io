@@ -165,6 +165,8 @@ summary {
 }
 
 .site-header {
+  /* Height of the desktop header: the 68px row plus its 1px border. The menu backdrop starts here. */
+  --site-header-height: 69px;
   position: sticky;
   top: 0;
   z-index: 200;
@@ -182,6 +184,13 @@ summary {
   gap: 24px;
 }
 
+/* Desktop only: the mega-menu anchors here. On mobile the menu panel anchors to the header. */
+@media (min-width: 861px) {
+  .site-header__inner {
+    position: relative;
+  }
+}
+
 .site-header__logo {
   display: inline-flex;
   align-items: center;
@@ -191,7 +200,7 @@ summary {
 .site-header__logo img {
   display: block;
   width: auto;
-  height: 32px;
+  height: 35.5px;
 }
 
 .site-footer__logo img {
@@ -202,77 +211,285 @@ summary {
 
 .desktop-navigation {
   display: flex;
-  align-items: center;
-  gap: 28px;
+  align-items: stretch;
+  align-self: stretch;
 }
 
-.desktop-navigation > a,
+/* Text links and the Services trigger share one interaction: the text brightens and
+   a cyan indicator grows along the bottom edge of the header. The links stretch the
+   full header height, which also gives them a generous hit area. */
+.desktop-navigation > a:not(.button),
 .services-dropdown__trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  border: 0;
   color: var(--text-secondary);
+  background: transparent;
+  font: inherit;
   font-size: 14px;
   font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 180ms ease;
+}
+
+.desktop-navigation > a:not(.button)::after,
+.services-dropdown__trigger::after {
+  position: absolute;
+  right: 14px;
+  bottom: -1px;
+  left: 14px;
+  height: 2px;
+  background: var(--accent);
+  content: "";
+  opacity: 0.9;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.desktop-navigation > a:not(.button):hover,
+.desktop-navigation > a:not(.button):focus-visible,
+.desktop-navigation > a:not(.button)[data-current="true"],
+.services-dropdown__trigger:hover,
+.services-dropdown__trigger:focus-visible,
+.services-dropdown__trigger[aria-expanded="true"],
+.services-dropdown__trigger[data-current="true"] {
+  color: var(--text);
+}
+
+.desktop-navigation > a:not(.button):hover::after,
+.desktop-navigation > a:not(.button):focus-visible::after,
+.desktop-navigation > a:not(.button)[data-current="true"]::after,
+.services-dropdown__trigger:hover::after,
+.services-dropdown__trigger:focus-visible::after,
+.services-dropdown__trigger[aria-expanded="true"]::after,
+.services-dropdown__trigger[data-current="true"]::after {
+  transform: scaleX(1);
+}
+
+/* The current page keeps a quieter indicator until it is hovered or focused. */
+.desktop-navigation > a:not(.button)[data-current="true"]::after,
+.services-dropdown__trigger[data-current="true"]::after {
+  opacity: 0.55;
+}
+
+.desktop-navigation > a:not(.button)[data-current="true"]:hover::after,
+.desktop-navigation > a:not(.button)[data-current="true"]:focus-visible::after,
+.services-dropdown__trigger[data-current="true"]:hover::after,
+.services-dropdown__trigger[data-current="true"]:focus-visible::after,
+.services-dropdown__trigger[data-current="true"][aria-expanded="true"]::after {
+  opacity: 0.9;
+}
+
+/* The tall link box would draw a tall focus ring, so the ring is inset around the text. */
+.desktop-navigation > a:not(.button):focus-visible,
+.services-dropdown__trigger:focus-visible {
+  outline-offset: -12px;
+  border-radius: 8px;
+}
+
+/* The header call to action keeps the shared .button styling and transitions. */
+.desktop-navigation__cta {
+  align-self: center;
+  margin-left: 14px;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.desktop-navigation__cta:hover,
+.desktop-navigation__cta:focus-visible {
+  box-shadow: 0 8px 22px rgba(3, 53, 168, 0.4);
+}
+
+.services-dropdown {
+  display: flex;
+  align-self: stretch;
+}
+
+.services-dropdown__trigger svg {
+  transition: transform 180ms ease;
+}
+
+.services-dropdown__trigger[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+/* The mega-menu attaches to the bottom edge of the header. It anchors to
+   .site-header__inner, so it lines up with the container's right edge. */
+.services-dropdown__panel {
+  position: absolute;
+  top: calc(100% + 1px);
+  right: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 264px minmax(0, 1fr);
+  gap: 12px;
+  width: min(880px, 100%);
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-top: 0;
+  border-radius: 0 0 14px 14px;
+  background:
+    linear-gradient(180deg, rgba(3, 53, 168, 0.16), rgba(3, 53, 168, 0) 60%),
+    var(--canvas-deep);
+  box-shadow: 0 32px 80px rgba(1, 15, 46, 0.55);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease,
+    visibility 0s linear 120ms;
+}
+
+/* Dims the page under the open menu. Stacking inside .site-header (z-index 200): page content
+   sits below the header, this layer (z-index 0) starts under the header edge, and the panel
+   (z-index 1) sits above it. About 24% of the deep navy: the page stays readable. */
+.services-dropdown__backdrop {
+  position: fixed;
+  top: var(--site-header-height);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  background: rgba(1, 15, 46, 0.24);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 120ms ease,
+    visibility 0s linear 120ms;
+}
+
+.services-dropdown__backdrop[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 180ms ease,
+    visibility 0s;
+}
+
+/* Invisible bridge across the border line, so the pointer never leaves the menu region. */
+.services-dropdown__panel::before {
+  position: absolute;
+  top: -12px;
+  right: 0;
+  left: 0;
+  height: 12px;
+  content: "";
+}
+
+.services-dropdown[data-open="true"] .services-dropdown__panel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    visibility 0s;
+}
+
+.services-dropdown__intro {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 16px 12px;
+  border-right: 1px solid var(--border-soft);
+}
+
+.services-dropdown__eyebrow {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.services-dropdown__lede {
+  margin-top: 12px;
+  color: var(--text);
+  font-size: 19px;
+  font-weight: 560;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.services-dropdown__all {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 24px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
   text-decoration: none;
   transition: color 160ms ease;
 }
 
-.desktop-navigation > a:hover,
-.services-dropdown__trigger:hover,
-.services-dropdown[open] .services-dropdown__trigger {
+.services-dropdown__all-arrow,
+.services-dropdown__arrow {
+  flex-shrink: 0;
+  transition:
+    transform 160ms ease,
+    color 160ms ease;
+}
+
+.services-dropdown__all:hover,
+.services-dropdown__all:focus-visible,
+.services-dropdown__all[aria-current="page"] {
   color: var(--text);
 }
 
-.desktop-navigation__cta {
-  margin-left: 4px;
-  color: #ffffff !important;
+.services-dropdown__all:hover .services-dropdown__all-arrow,
+.services-dropdown__all:focus-visible .services-dropdown__all-arrow {
+  transform: translateX(3px);
 }
 
-.services-dropdown {
-  position: relative;
-}
-
-.services-dropdown__trigger {
-  display: inline-flex;
+.services-dropdown__list {
+  display: grid;
+  gap: 4px;
   list-style: none;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-}
-
-.services-dropdown__trigger::-webkit-details-marker {
-  display: none;
-}
-
-.services-dropdown[open] .services-dropdown__trigger svg {
-  transform: rotate(180deg);
-}
-
-.services-dropdown__trigger svg {
-  transition: transform 160ms ease;
-}
-
-.services-dropdown__panel {
-  position: absolute;
-  top: calc(100% + 18px);
-  left: -18px;
-  width: min(420px, 80vw);
-  padding: 10px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--canvas-deep);
-  box-shadow: var(--shadow-menu);
 }
 
 .services-dropdown__item {
-  display: block;
-  padding: 14px;
-  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
   text-decoration: none;
-  transition: background-color 160ms ease;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
 }
 
 .services-dropdown__item:hover,
 .services-dropdown__item:focus-visible {
-  background: rgba(135, 229, 255, 0.07);
+  border-color: rgba(135, 229, 255, 0.28);
+  background: rgba(135, 229, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+.services-dropdown__item[aria-current="page"] {
+  border-color: var(--border-soft);
+  background: rgba(135, 229, 255, 0.04);
 }
 
 .services-dropdown__label,
@@ -282,26 +499,49 @@ summary {
 
 .services-dropdown__label {
   margin-bottom: 3px;
-  color: var(--text);
-  font-size: 14px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 15px;
   font-weight: 600;
+  transition: color 160ms ease;
 }
 
 .services-dropdown__description {
   color: var(--text-muted);
-  font-size: 12.5px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
-.services-dropdown__all {
-  display: block;
-  margin-top: 4px;
-  padding: 12px 14px 8px;
-  border-top: 1px solid var(--border);
+.services-dropdown__arrow {
+  color: var(--text-faint);
+}
+
+.services-dropdown__item:hover .services-dropdown__label,
+.services-dropdown__item:focus-visible .services-dropdown__label {
+  color: var(--text);
+}
+
+.services-dropdown__item:hover .services-dropdown__arrow,
+.services-dropdown__item:focus-visible .services-dropdown__arrow {
   color: var(--accent);
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-dropdown__panel,
+  .services-dropdown[data-open="true"] .services-dropdown__panel {
+    transform: none;
+    transition: none;
+  }
+
+  .services-dropdown__backdrop,
+  .services-dropdown__backdrop[data-open="true"] {
+    transition: none;
+  }
+
+  .services-dropdown__item:hover,
+  .services-dropdown__item:focus-visible {
+    transform: none;
+  }
 }
 
 .mobile-navigation {
@@ -340,9 +580,13 @@ summary {
   right: 0;
   left: 0;
   display: none;
+  max-height: calc(100vh - 68px);
+  max-height: calc(100dvh - 68px);
   padding: 16px 24px 24px;
   border-bottom: 1px solid var(--border);
   background: var(--canvas-deep);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .mobile-navigation__panel[data-open="true"] {
@@ -351,8 +595,8 @@ summary {
   gap: 4px;
 }
 
-.mobile-navigation__panel > a,
-.mobile-navigation__services > summary,
+.mobile-navigation__panel > a:not(.button),
+.mobile-navigation__services-toggle,
 .mobile-navigation__service-links a {
   display: block;
   padding: 11px 0;
@@ -362,8 +606,24 @@ summary {
   text-decoration: none;
 }
 
-.mobile-navigation__services > summary {
+.mobile-navigation__services-toggle {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  text-align: left;
   cursor: pointer;
+}
+
+.mobile-navigation__services-toggle svg {
+  transition: transform 160ms ease;
+}
+
+.mobile-navigation__services-toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
 }
 
 .mobile-navigation__service-links {
@@ -371,10 +631,27 @@ summary {
   padding: 0 0 8px 16px;
 }
 
+.mobile-navigation__service-links[hidden] {
+  display: none;
+}
+
 .mobile-navigation__service-links a {
   padding: 8px 0;
   color: var(--text-muted);
   font-size: 14px;
+}
+
+/* The current page or section keeps a quiet cyan marker. */
+.mobile-navigation__panel a[data-current="true"],
+.mobile-navigation__services-toggle[data-current="true"] {
+  color: var(--text);
+  box-shadow: inset 2px 0 0 var(--accent);
+  padding-left: 12px;
+}
+
+.mobile-navigation__service-links a[data-current="true"] {
+  padding-left: 12px;
+  margin-left: -12px;
 }
 
 .mobile-navigation__cta {
@@ -1411,6 +1688,8 @@ summary {
 
   .mobile-navigation__panel {
     top: 64px;
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
     padding-inline: 18px;
   }
 
@@ -4611,12 +4890,12 @@ summary {
   stroke: rgba(135, 229, 255, 0.11);
 }
 
-/* The dash rests just before the path (offset 8) and is invisible there. */
+/* The dash rests just before the path (offset = its length) and is invisible there. */
 .infra-core__signal {
   stroke: var(--accent);
-  stroke-width: 2;
-  stroke-dasharray: 8 200;
-  stroke-dashoffset: 8;
+  stroke-width: 2.2;
+  stroke-dasharray: 14 400;
+  stroke-dashoffset: 14;
   vector-effect: none;
 }
 
@@ -4637,6 +4916,87 @@ summary {
   transform-origin: 0 0;
 }
 
+/* Motion, largest and slowest first:
+   1. global   the whole object drifts and tilts in perspective (26s and 19s loops)
+   2. layers   the under-layer and glass lid drift out of phase (12s and 14s loops)
+   3. core     the top and bottom core plates separate and recombine, once per signal
+   4. signal   one 12s sequence: inbound rail, core, outbound rail
+   5. support  the shell sways and the halo answers the signal
+   Every loop starts part-way through (negative delay), so motion is already under way at load. */
+@keyframes infra-core-yaw {
+  from {
+    transform: perspective(900px) translateX(-6px) rotateY(5deg);
+  }
+
+  to {
+    transform: perspective(900px) translateX(6px) rotateY(-5deg);
+  }
+}
+
+@keyframes infra-core-pitch {
+  from {
+    transform: perspective(900px) translateY(-4px) rotateX(-2deg);
+  }
+
+  to {
+    transform: perspective(900px) translateY(4px) rotateX(2deg);
+  }
+}
+
+@keyframes infra-core-drift {
+  from {
+    transform: translate(-4px, -9px);
+  }
+
+  to {
+    transform: translate(4px, 9px);
+  }
+}
+
+/* The signal reaches the core at 34% of the cycle. */
+@keyframes infra-core-core-lift {
+  0%,
+  34%,
+  76%,
+  100% {
+    transform: translateY(0);
+  }
+
+  46%,
+  60% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes infra-core-core-drop {
+  0%,
+  34%,
+  76%,
+  100% {
+    transform: translateY(0);
+  }
+
+  46%,
+  60% {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes infra-core-halo {
+  0%,
+  30%,
+  72%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.98);
+  }
+
+  42% {
+    opacity: 0.95;
+    transform: scale(1.08);
+  }
+}
+
 @keyframes infra-core-sway {
   from {
     transform: rotate(-4deg);
@@ -4647,117 +5007,66 @@ summary {
   }
 }
 
-@keyframes infra-core-drift {
-  from {
-    transform: translateY(-4px);
-  }
-
-  to {
-    transform: translateY(4px);
-  }
-}
-
-@keyframes infra-core-breathe {
-  from {
-    opacity: 0.5;
-    transform: scale(0.96);
-  }
-
-  to {
-    opacity: 0.85;
-    transform: scale(1.06);
-  }
-}
-
-/* A brief brightening of an edge, as the signal passes through a layer. */
-@keyframes infra-core-flash {
-  0%,
-  28%,
-  52%,
-  100% {
-    stroke-opacity: var(--ic-stroke);
-  }
-
-  36% {
-    stroke-opacity: 1;
-  }
-}
-
-/* The dash travels from before the path (8) to past its end (-108). */
-@keyframes infra-core-signal-in {
+/* The dash travels from before the path (14) to past its end (-104), then rests. */
+@keyframes infra-core-signal {
   0% {
-    stroke-dashoffset: 8;
+    stroke-dashoffset: 14;
   }
 
-  30%,
+  34%,
   100% {
-    stroke-dashoffset: -108;
+    stroke-dashoffset: -104;
   }
 }
 
-@keyframes infra-core-signal-out {
-  0%,
-  38% {
-    stroke-dashoffset: 8;
-  }
-
-  68%,
-  100% {
-    stroke-dashoffset: -108;
-  }
-}
-
-/* Every screen size: the halo (compositor only) and the shell sway. */
+/* Every screen size: global motion and the signal. */
 @media (prefers-reduced-motion: no-preference) {
-  .infra-core::after {
-    animation: infra-core-breathe 8s ease-in-out infinite alternate;
+  .infra-core {
+    transform-origin: 50% 50%;
+    will-change: transform;
+    animation: infra-core-yaw 13s ease-in-out -6.5s infinite alternate;
   }
 
-  .infra-core__sway {
-    animation: infra-core-sway 22s ease-in-out infinite alternate;
-  }
-}
-
-/* Above the mobile breakpoint: layer drift, the signal sequence and layer flashes. */
-@media (prefers-reduced-motion: no-preference) and (min-width: 701px) {
-  .infra-core__slab--under {
-    animation: infra-core-drift 15s ease-in-out infinite alternate;
+  .infra-core__svg {
+    transform-box: border-box;
+    transform-origin: 50% 50%;
+    animation: infra-core-pitch 9.5s ease-in-out -4.75s infinite alternate;
   }
 
-  .infra-core__slab--lid {
-    animation: infra-core-drift 19s ease-in-out infinite alternate-reverse;
-  }
-
+  /* The outbound signal starts when the inbound one is 40% through its cycle. */
   .infra-core__signal--in {
-    animation: infra-core-signal-in 24s cubic-bezier(0.45, 0, 0.35, 1) infinite;
+    animation: infra-core-signal 12s cubic-bezier(0.45, 0, 0.35, 1) -2.4s infinite;
   }
 
   .infra-core__signal--out {
-    animation: infra-core-signal-out 24s cubic-bezier(0.45, 0, 0.35, 1) infinite;
+    animation: infra-core-signal 12s cubic-bezier(0.45, 0, 0.35, 1) 2.4s infinite;
+  }
+}
+
+/* Above the mobile breakpoint: layer drift, core state motion and support motion. */
+@media (prefers-reduced-motion: no-preference) and (min-width: 701px) {
+  .infra-core::after {
+    animation: infra-core-halo 12s ease-in-out -2.4s infinite;
   }
 
-  .infra-core__top {
-    animation: infra-core-flash 24s ease-in-out infinite;
+  .infra-core__sway {
+    animation: infra-core-sway 22s ease-in-out -11s infinite alternate;
   }
 
-  .infra-core__slab--under .infra-core__top {
-    animation-delay: 0.6s;
+  .infra-core__slab--under {
+    animation: infra-core-drift 6s ease-in-out -3s infinite alternate;
   }
 
-  .infra-core__slab--core-a .infra-core__top {
-    animation-delay: 1.2s;
+  .infra-core__slab--lid {
+    animation: infra-core-drift 7s ease-in-out -3.5s infinite alternate-reverse;
   }
 
-  .infra-core__slab--core-b .infra-core__top {
-    animation: none;
+  .infra-core__slab--core-c {
+    animation: infra-core-core-lift 12s ease-in-out -2.4s infinite;
   }
 
-  .infra-core__slab--core-c .infra-core__top {
-    animation-delay: 1.8s;
-  }
-
-  .infra-core__slab--lid .infra-core__top {
-    animation-delay: 2.4s;
+  .infra-core__slab--core-a {
+    animation: infra-core-core-drop 12s ease-in-out -2.4s infinite;
   }
 }
 
