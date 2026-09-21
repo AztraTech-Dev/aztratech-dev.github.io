@@ -4,6 +4,7 @@ import EngagementStart from "./components/commercial/EngagementStart";
 import ServicePaths from "./components/commercial/ServicePaths";
 import InfrastructureSystemMap from "./components/diagrams/InfrastructureSystemMap";
 import SystemCoordinationModel from "./components/diagrams/SystemCoordinationModel";
+import AztraTechInfrastructureCore from "./components/visuals/AztraTechInfrastructureCore";
 import ButtonLink from "./components/ui/ButtonLink";
 import CTASection from "./components/ui/CTASection";
 import Container from "./components/ui/Container";
@@ -87,7 +88,7 @@ export default function Home() {
               </p>
             </div>
 
-            <InfrastructureSystemMap />
+            <AztraTechInfrastructureCore />
           </div>
         </Container>
       </section>
@@ -126,6 +127,27 @@ export default function Home() {
               }
             />
             <EngineeringProblems />
+          </div>
+        </Container>
+      </section>
+
+      <section className="home-section home-section--surface">
+        <Container>
+          <div className="home-two-column home-two-column--system-map">
+            <SectionIntro
+              eyebrow="Infrastructure view"
+              title="A production system has more than one source of state."
+              body={
+                <p>
+                  The product, its providers and the networks underneath each
+                  hold part of the record of what happened. Controls define
+                  and enforce what is allowed, and operations has to reconcile
+                  the differences. Architecture starts by deciding which record
+                  is authoritative and where the others are checked against it.
+                </p>
+              }
+            />
+            <InfrastructureSystemMap />
           </div>
         </Container>
       </section>
