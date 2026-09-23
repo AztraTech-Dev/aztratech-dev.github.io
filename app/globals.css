@@ -4685,6 +4685,67 @@ summary {
   text-align: right;
 }
 
+/* Restrained "read next" links to the other existing articles, placed
+   between the closing section and the commercial bridge so a finished
+   reader has somewhere to go besides the CTA or the back button. Only
+   ever lists the site's other real articles -- no algorithm, no
+   pagination, nothing hypothetical. */
+.article-related {
+  margin-top: 70px;
+  padding-top: 44px;
+  border-top: 1px solid var(--border);
+}
+
+.article-related h2 {
+  margin: 0 0 24px;
+  color: var(--text);
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+
+.article-related__list {
+  display: grid;
+  gap: 20px;
+}
+
+.article-related__item {
+  display: block;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(135, 229, 255, 0.12);
+  color: inherit;
+  text-decoration: none;
+}
+
+.article-related__item:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.article-related__item span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--brand-light-blue);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.article-related__item strong {
+  display: block;
+  color: var(--text);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  transition: color 160ms ease;
+}
+
+.article-related__item:hover strong,
+.article-related__item:focus-visible strong {
+  color: var(--brand-light-blue);
+}
+
 .control-evidence-model {
   margin: 0;
   padding: 28px;
@@ -4886,6 +4947,19 @@ summary {
 
   .article-sources span {
     text-align: left;
+  }
+
+  .article-related {
+    margin-top: 56px;
+    padding-top: 34px;
+  }
+
+  .article-related__list {
+    gap: 14px;
+  }
+
+  .article-related__item strong {
+    font-size: 1.15rem;
   }
 
   .control-evidence-model {

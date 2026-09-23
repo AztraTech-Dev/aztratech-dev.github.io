@@ -1,4 +1,5 @@
 import ArticleHeader from "../../components/editorial/ArticleHeader";
+import ArticleRelated from "../../components/editorial/ArticleRelated";
 import ArticleServiceBridge from "../../components/editorial/ArticleServiceBridge";
 import ArticleSources from "../../components/editorial/ArticleSources";
 import ControlImplementationEvidence from "../../components/diagrams/ControlImplementationEvidence";
@@ -137,6 +138,8 @@ export default function SecurityArchitectureReviewArticle() {
               The broader product still includes privileged paths, backend services, operational workflows, external providers and people with authority. Security engineering is most useful when those parts are designed together and when the review confirms an architecture that already knows what it is trying to protect.
             </p>
           </section>
+
+          <ArticleRelated currentHref="/insights/security-reviews-architecture-problems" />
 
           <ArticleServiceBridge
             eyebrow="Web3 Security"

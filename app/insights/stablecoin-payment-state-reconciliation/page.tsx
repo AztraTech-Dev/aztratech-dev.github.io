@@ -1,4 +1,5 @@
 import ArticleHeader from "../../components/editorial/ArticleHeader";
+import ArticleRelated from "../../components/editorial/ArticleRelated";
 import ArticleServiceBridge from "../../components/editorial/ArticleServiceBridge";
 import ArticleSources from "../../components/editorial/ArticleSources";
 import PaymentStateModel from "../../components/diagrams/PaymentStateModel";
@@ -120,6 +121,8 @@ export default function StablecoinPaymentStateArticle() {
               The useful question is whether every system that matters can explain what happened, what state the payment is in now and what should happen next. When that answer is explicit, adding providers and rails becomes a contained engineering problem rather than a growing set of exceptions.
             </p>
           </section>
+
+          <ArticleRelated currentHref="/insights/stablecoin-payment-state-reconciliation" />
 
           <ArticleServiceBridge
             eyebrow="Stablecoin Payment Rails"

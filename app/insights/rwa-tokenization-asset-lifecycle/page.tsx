@@ -1,4 +1,5 @@
 import ArticleHeader from "../../components/editorial/ArticleHeader";
+import ArticleRelated from "../../components/editorial/ArticleRelated";
 import ArticleServiceBridge from "../../components/editorial/ArticleServiceBridge";
 import ArticleSources from "../../components/editorial/ArticleSources";
 import AssetLifecycleModel from "../../components/diagrams/AssetLifecycleModel";
@@ -120,6 +121,8 @@ export default function RwaAssetLifecycleArticle() {
               A durable tokenization architecture connects identity, eligibility, ownership, transfers, servicing and redemption into one operating model. The on-chain and off-chain boundary can vary. What should not vary is whether the product knows where each decision belongs.
             </p>
           </section>
+
+          <ArticleRelated currentHref="/insights/rwa-tokenization-asset-lifecycle" />
 
           <ArticleServiceBridge
             eyebrow="RWA Tokenization"
