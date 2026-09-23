@@ -1740,42 +1740,44 @@ summary {
   letter-spacing: 0.12em;
 }
 
+/* Operationally lighter than the technical sections above it: a compact
+   numbered row list rather than another bordered card grid. */
 .engagement-paths {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  border-top: 1px solid var(--border);
 }
 
 .engagement-path {
-  min-height: 250px;
-  padding: 25px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--surface-soft);
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 20px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
 }
 
 .engagement-path__index {
+  padding-top: 3px;
   color: var(--accent);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 650;
   letter-spacing: 0.08em;
 }
 
 .engagement-path h3 {
-  margin-top: 34px;
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
 
 .engagement-path__signal {
-  margin-top: 12px !important;
+  margin-top: 10px !important;
   color: var(--text-secondary) !important;
+  font-size: 13.5px;
   font-weight: 500;
 }
 
 .engagement-path p {
-  margin-top: 10px;
+  max-width: 640px;
+  margin-top: 8px;
   color: var(--text-muted);
   font-size: 13.5px;
   line-height: 1.65;
@@ -1828,19 +1830,20 @@ summary {
   line-height: 1.7;
 }
 
+/* Editorial index rather than blog-tile cards: a compact category/title
+   row list, closer to a magazine contents page than a card wall. */
 .insight-preview-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
   margin-top: 42px;
+  border-top: 1px solid var(--border);
 }
 
 .insight-preview {
-  min-height: 220px;
-  padding: 24px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--surface-soft);
+  display: grid;
+  grid-template-columns: minmax(150px, 210px) minmax(0, 1fr);
+  align-items: baseline;
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--border);
 }
 
 .insight-preview p {
@@ -1852,7 +1855,7 @@ summary {
 }
 
 .insight-preview h3 {
-  margin-top: 42px;
+  max-width: 620px;
   font-size: 17px;
   font-weight: 560;
   letter-spacing: -0.018em;
@@ -1923,13 +1926,11 @@ summary {
     max-width: 760px;
   }
 
-  .service-paths,
-  .insight-preview-grid {
+  .service-paths {
     grid-template-columns: 1fr 1fr;
   }
 
-  .service-path:last-child,
-  .insight-preview:last-child {
+  .service-path:last-child {
     grid-column: 1 / -1;
   }
 
@@ -2061,19 +2062,28 @@ summary {
   }
 
   .service-paths,
-  .engagement-paths,
-  .responsibility-grid,
-  .insight-preview-grid {
+  .responsibility-grid {
     grid-template-columns: 1fr;
   }
 
-  .service-path:last-child,
-  .insight-preview:last-child {
+  .service-path:last-child {
     grid-column: auto;
   }
 
   .service-path {
     min-height: 280px;
+  }
+
+  .engagement-path {
+    grid-template-columns: 34px 1fr;
+    gap: 14px;
+    padding: 22px 0;
+  }
+
+  .insight-preview {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 18px 0;
   }
 
   .infrastructure-map {

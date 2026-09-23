@@ -152,7 +152,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="home-section home-section--surface">
+      <section className="home-section">
         <Container>
           <SectionIntro
             eyebrow="System-level architecture"
