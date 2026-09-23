@@ -33,6 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# Cloudflare Worker local state/secrets (see infrastructure/lead-intake-worker)
+.dev.vars*
+infrastructure/**/.wrangler/
+
 # vercel
 .vercel
 

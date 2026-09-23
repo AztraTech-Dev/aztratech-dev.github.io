@@ -1,0 +1,15 @@
+# Worker-local dependency install (root .gitignore's /node_modules is
+# anchored to the repo root and does not cover this nested directory).
+node_modules/
+
+# Wrangler-generated type declarations; regenerate with `npm run types`.
+worker-configuration.d.ts
+
+# Local Wrangler state (also covered by the root .gitignore pattern
+# infrastructure/**/.wrangler/, kept here too for a self-contained project).
+.wrangler/
+
+# Local secrets (also covered by the root .gitignore pattern .dev.vars*).
+.dev.vars
+.dev.vars.*
+!.dev.vars.example

@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The Worker is an independent TypeScript project and must not be
+    // linted as Next.js application code.
+    "infrastructure/**",
   ]),
 ]);
 
