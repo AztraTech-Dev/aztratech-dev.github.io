@@ -4217,6 +4217,47 @@ summary {
   }
 }
 
+/* HOW WE WORK / ABOUT: the shared entry-card / principle-card / model-card
+   recipe carries an oversized gap before the heading (52px / 42px), tuned
+   for a card standing alone. On these two pages the cards sit four (or
+   three) at a time in a 2x2/3-up grid of genuinely parallel, non-sequential
+   items, so the extra empty space reads as dead space rather than
+   breathing room. Fixed with page-scoped selectors rather than editing the
+   shared rule, since that rule is also shared with .contact-topic-card and
+   .contact-channel on /contact, which stays untouched. The grid itself is
+   kept (not converted to a list): a 2x2/3-up grid of parallel options is
+   the correct shape here, and a numbered list would read as more linear,
+   not less, for content that is deliberately non-sequential. */
+.how-we-work-page .engagement-entry-card h2 {
+  margin-top: 24px;
+}
+
+.about-page .about-principle h2 {
+  margin-top: 24px;
+}
+
+.how-we-work-page .responsibility-model-card h2 {
+  margin-top: 22px;
+}
+
+.about-page .operating-model-card h2 {
+  margin-top: 22px;
+}
+
+/* min-height only above the breakpoint where the shared rule resets it to
+   auto, so this never fights that mobile reset. */
+@media (min-width: 701px) {
+  .how-we-work-page .engagement-entry-card,
+  .about-page .about-principle {
+    min-height: 220px;
+  }
+
+  .how-we-work-page .responsibility-model-card,
+  .about-page .operating-model-card {
+    min-height: 190px;
+  }
+}
+
 /* BATCH 4: HOW WE WORK MOBILE DENSITY POLISH */
 @media (max-width: 700px) {
   .how-we-work-page .supporting-section > .site-container > .section-intro + .engagement-entry-grid {

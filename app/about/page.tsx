@@ -33,7 +33,7 @@ const operatingModel = [
 
 export default function AboutPage() {
   return (
-    <main id="main-content" className="supporting-page">
+    <main id="main-content" className="supporting-page about-page">
       <JsonLd data={breadcrumbJsonLd} />
       <section className="supporting-hero supporting-hero--about">
         <Container variant="wide">
