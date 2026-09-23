@@ -1,12 +1,12 @@
 import ArchitectureDecisionPack from "./components/artifacts/ArchitectureDecisionPack";
 import EngineeringProblems from "./components/commercial/EngineeringProblems";
 import EngagementStart from "./components/commercial/EngagementStart";
+import LeadCaptureSection from "./components/commercial/LeadCaptureSection";
 import ServicePaths from "./components/commercial/ServicePaths";
 import InfrastructureSystemMap from "./components/diagrams/InfrastructureSystemMap";
 import SystemCoordinationModel from "./components/diagrams/SystemCoordinationModel";
 import AztraTechInfrastructureCore from "./components/visuals/AztraTechInfrastructureCore";
 import ButtonLink from "./components/ui/ButtonLink";
-import CTASection from "./components/ui/CTASection";
 import Container from "./components/ui/Container";
 import SectionIntro from "./components/ui/SectionIntro";
 import { siteConfig } from "../lib/site-config";
@@ -294,14 +294,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <CTASection
-        heading="Bring the technical problem."
-        body="A 30-minute conversation is enough to understand the current state, what is blocked and whether there is a useful next step."
-        primaryLabel="Book a 30-minute discovery call"
-        primaryHref={siteConfig.calendlyUrl}
-        secondaryLabel="How we work"
-        secondaryHref={siteConfig.routes.howWeWork}
-      />
+      <LeadCaptureSection />
     </main>
   );
 }

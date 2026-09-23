@@ -1,6 +1,7 @@
 import ButtonLink from "../components/ui/ButtonLink";
 import Container from "../components/ui/Container";
 import SectionIntro from "../components/ui/SectionIntro";
+import LeadForm from "../components/forms/LeadForm";
 import { siteConfig } from "../../lib/site-config";
 import JsonLd from "../components/seo/JsonLd";
 import { buildBreadcrumbJsonLd, buildMetadata } from "../../lib/seo";
@@ -99,6 +100,27 @@ export default function ContactPage() {
             <a className="contact-channel" href={siteConfig.contact.telegram} target="_blank" rel="noopener noreferrer">
               <span>TELEGRAM</span><strong>@aztratech</strong><small>Direct channel</small>
             </a>
+          </div>
+        </Container>
+      </section>
+
+      <section className="supporting-section supporting-section--surface">
+        <Container>
+          <div className="contact-lead-grid">
+            <SectionIntro
+              eyebrow="Project context"
+              title="Send the project context."
+              body={
+                <p>
+                  Describe the system, what is already in place and the
+                  decision that is still open. We review each message and
+                  reply if there is a useful next step.
+                </p>
+              }
+            />
+            <div className="contact-lead-panel">
+              <LeadForm source="contact" />
+            </div>
           </div>
         </Container>
       </section>

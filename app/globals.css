@@ -96,6 +96,20 @@ summary {
   transform: translateY(0);
 }
 
+/* Visually hidden but still reachable by assistive tech; used for live
+   status text that has a visible equivalent shown elsewhere. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .site-container {
   width: 100%;
   margin: 0 auto;
@@ -806,6 +820,319 @@ summary {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+/* Lead capture: the homepage's pre-footer conversion section. Reuses the
+   cta-section surface language (border, radius-lg, gradient, ring motif)
+   as a two-column continuation of it rather than a new visual system. */
+.lead-capture {
+  padding: 80px 0;
+  border-top: 1px solid var(--border);
+  background: var(--canvas);
+}
+
+.lead-capture__surface {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(380px, 7fr);
+  align-items: start;
+  gap: clamp(40px, 5vw, 64px);
+  overflow: hidden;
+  padding: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(120deg, rgba(3, 53, 168, 0.24), transparent 54%),
+    var(--surface);
+}
+
+.lead-capture__surface::after {
+  position: absolute;
+  right: -80px;
+  bottom: -120px;
+  width: 280px;
+  height: 280px;
+  border: 1px solid rgba(135, 229, 255, 0.12);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.lead-capture__copy,
+.lead-capture__form-panel {
+  position: relative;
+  z-index: 1;
+}
+
+.lead-capture__copy {
+  max-width: 420px;
+  padding-top: 4px;
+}
+
+.lead-capture__eyebrow {
+  margin-bottom: 14px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.lead-capture__copy h2 {
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 550;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.lead-capture__intro {
+  margin-top: 14px;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.lead-capture__alt {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.lead-capture__alt p {
+  margin-bottom: 12px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.lead-capture__form-panel {
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: rgba(1, 15, 46, 0.58);
+  box-shadow: var(--shadow-panel);
+}
+
+@media (max-width: 980px) {
+  .lead-capture__surface {
+    grid-template-columns: 1fr;
+    padding: 32px;
+  }
+
+  .lead-capture__copy {
+    max-width: 560px;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .lead-capture {
+    padding: 64px 0;
+  }
+
+  .lead-capture__surface {
+    padding: 24px;
+    border-radius: var(--radius-md);
+  }
+
+  .lead-capture__form-panel {
+    padding: 20px;
+  }
+
+  .lead-capture__alt {
+    margin-top: 28px;
+    padding-top: 20px;
+  }
+}
+
+/* Lead form: shared between the homepage lead-capture panel and the
+   compact contact-page panel. Field chrome lives here; the surrounding
+   panel (border/background/padding) is supplied by the parent wrapper. */
+.lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.lead-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.lead-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lead-form__field label {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.lead-form input,
+.lead-form textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(1, 15, 46, 0.42);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+.lead-form textarea {
+  min-height: 132px;
+  resize: vertical;
+}
+
+.lead-form input::placeholder,
+.lead-form textarea::placeholder {
+  color: var(--text-faint);
+}
+
+.lead-form input:hover,
+.lead-form textarea:hover {
+  border-color: rgba(135, 229, 255, 0.3);
+}
+
+.lead-form input:focus-visible,
+.lead-form textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-color: var(--accent);
+}
+
+.lead-form input:disabled,
+.lead-form textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.lead-form input[aria-invalid="true"],
+.lead-form textarea[aria-invalid="true"] {
+  border-color: rgba(255, 138, 138, 0.6);
+}
+
+.lead-form__error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ff9d9d;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.lead-form__error::before {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 138, 138, 0.18);
+  color: #ff9d9d;
+  font-size: 10px;
+  font-weight: 700;
+  content: "!";
+}
+
+/* Honeypot: kept in the DOM (not display:none) but moved off-canvas.
+   tabIndex={-1} and aria-hidden on the component keep it out of the tab
+   order and the accessibility tree. */
+.lead-form__hp {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.lead-form__security-note {
+  color: var(--text-faint);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.lead-form__form-error {
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 138, 138, 0.35);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 138, 138, 0.08);
+}
+
+.lead-form__form-error p {
+  color: var(--text);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.lead-form__form-error-alt {
+  margin-top: 6px;
+  color: var(--text-secondary);
+}
+
+.lead-form__form-error-alt a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.lead-form__submit {
+  align-self: flex-start;
+}
+
+.lead-form__privacy {
+  color: var(--text-faint);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.lead-form__privacy a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.lead-form--success h3 {
+  font-size: clamp(22px, 2.4vw, 26px);
+  font-weight: 550;
+  letter-spacing: -0.02em;
+}
+
+.lead-form--success p {
+  margin-top: 12px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.lead-form--success p.lead-form__reference {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-soft);
+  color: var(--text-faint);
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 11.5px;
+}
+
+@media (max-width: 700px) {
+  .lead-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .lead-form__submit {
+    align-self: stretch;
+  }
 }
 
 .home-page {
@@ -3503,6 +3830,29 @@ summary {
   margin-top: 8px;
   color: var(--text-muted);
   font-size: 12px;
+}
+
+/* Compact wrapper around the shared LeadForm for the contact page --
+   lighter chrome than the homepage lead-capture panel, matching the
+   weight of the existing contact-primary-card / contact-channel panels. */
+.contact-lead-grid {
+  display: grid;
+  gap: 32px;
+}
+
+.contact-lead-panel {
+  max-width: 640px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-soft);
+  box-shadow: var(--shadow-panel);
+}
+
+@media (max-width: 700px) {
+  .contact-lead-panel {
+    padding: 20px;
+  }
 }
 
 .privacy-hero {

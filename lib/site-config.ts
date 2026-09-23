@@ -2,6 +2,11 @@ export const siteConfig = {
   name: "AztraTech",
   siteUrl: "https://aztra.tech",
   calendlyUrl: "https://calendly.com/vladislav-usichenko/30min",
+  // Public backend endpoint for the project-context lead form. Not a secret:
+  // this is a public POST target on a static-export site, and the value is
+  // stable enough that git history should show it explicitly rather than
+  // route it through env plumbing that this site otherwise has none of.
+  leadEndpoint: "https://aztratech-lead-intake.aztratech.workers.dev/lead",
   contact: {
     email: "vladyslav.usichenko@aztra.tech",
     linkedIn: "https://www.linkedin.com/company/aztratech-company/",

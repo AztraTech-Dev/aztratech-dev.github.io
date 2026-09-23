@@ -20,12 +20,20 @@ const currentDataPoints = [
     "The site links to Calendly for booking a discovery call. If you choose to schedule, the information you provide there is processed through Calendly and made available to AztraTech for scheduling and follow-up.",
   ],
   [
+    "Project context form",
+    "The homepage and the Contact page include a short form for sending a written project context instead of booking a call. The form collects your name, email address, an optional company or project name, the context you write and which page you submitted it from. Submissions are sent to a Cloudflare Worker and stored in a Cloudflare D1 database configured for the EU jurisdiction. AztraTech uses this information only to review the message and reply if there is a useful next step. There is currently no email or CRM notification service connected to the form; submissions are reviewed directly from the stored records. Do not send private keys, seed phrases, credentials or other secrets through the form.",
+  ],
+  [
+    "Technical abuse prevention on the form",
+    "As part of handling the request, Cloudflare receives standard technical request data, including the request's IP address. The backend may use the IP address briefly to apply submission limits and reduce automated abuse of the form. The IP address itself is not stored with your submission. Instead, the system stores a pseudonymous value derived from the IP address with a keyed, one-way function that changes daily, used only to apply short-term submission limits. The browser's User-Agent string is not stored with form submissions, and the form does not collect marketing attribution parameters such as campaign or referrer tracking codes.",
+  ],
+  [
     "Direct contact",
     "If you contact AztraTech by email, LinkedIn, Telegram, GitHub or another linked channel, AztraTech receives the information you choose to send and uses it to respond, evaluate the inquiry and manage the resulting business relationship.",
   ],
   [
     "Cookies and tracking",
-    "AztraTech does not currently use website analytics, advertising pixels, marketing cookies, embedded CRM forms or newsletter tracking on aztra.tech. External services you choose to open may use their own cookies or similar technologies under their own policies.",
+    "AztraTech does not use website analytics, advertising pixels, marketing cookies, advertising identifiers or newsletter tracking on aztra.tech. The project-context form submits directly to AztraTech's own backend and does not load a third-party form embed, CRM widget or marketing script. External services you choose to open may use their own cookies or similar technologies under their own policies.",
   ],
 ] as const;
 
@@ -38,12 +46,13 @@ export default function PrivacyPage() {
           <h1>Privacy and site data.</h1>
           <p>
             This notice explains how personal data can be processed when you
-            visit aztra.tech, book a call or contact AztraTech through a linked
+            visit aztra.tech, book a call, send a message through the
+            project-context form or contact AztraTech through a linked
             communication channel.
           </p>
           <div className="privacy-status">
             <span>EFFECTIVE</span>
-            <strong>20 September 2026</strong>
+            <strong>23 September 2026</strong>
           </div>
         </Container>
       </section>
@@ -78,14 +87,15 @@ export default function PrivacyPage() {
           <div className="privacy-section">
             <h2>Why AztraTech uses contact data</h2>
             <p>
-              Information received through scheduling or direct communication
-              is used to respond to requests, arrange meetings, assess mutual
-              fit, prepare or manage an engagement, maintain business records,
-              protect systems and comply with applicable legal obligations.
-              Where data protection law requires a legal basis, processing may
-              rely on steps requested before a contract, performance of a
-              contract, legitimate business interests, legal obligations or
-              consent where consent is required.
+              Information received through scheduling, the project-context
+              form or direct communication is used to respond to requests,
+              arrange meetings, assess mutual fit, prepare or manage an
+              engagement, maintain business records, protect systems and
+              comply with applicable legal obligations. Where data protection
+              law requires a legal basis, processing may rely on steps
+              requested before a contract, performance of a contract,
+              legitimate business interests, legal obligations or consent
+              where consent is required.
             </p>
           </div>
 
@@ -93,35 +103,45 @@ export default function PrivacyPage() {
             <h2>Third-party services</h2>
             <p>
               GitHub provides the hosting infrastructure for this website.
-              Calendly provides the external scheduling service. Links can also
-              take you to LinkedIn, Telegram, GitHub or other third-party
-              destinations. These providers may process data in different
-              countries and apply their own privacy, security and retention
-              practices. AztraTech does not control those independent practices.
+              The project-context form submits to a Cloudflare Worker, and
+              submissions are stored in a Cloudflare D1 database configured
+              for the EU jurisdiction; Cloudflare&apos;s network may still
+              process the underlying web request at other locations as part
+              of ordinary request routing. Calendly provides the external
+              scheduling service. Links can also take you to LinkedIn,
+              Telegram, GitHub or other third-party destinations. These
+              providers may process data in different countries and apply
+              their own privacy, security and retention practices. AztraTech
+              does not control those independent practices.
             </p>
           </div>
 
           <div className="privacy-section">
             <h2>Retention and your choices</h2>
             <p>
-              The AztraTech website itself does not maintain a database of form
-              submissions, analytics profiles or advertising identifiers.
-              Scheduling records and business correspondence may remain in the
-              services used to manage those communications for as long as they
-              are needed for the relationship, operational records or applicable
-              legal obligations. Depending on the law that applies to you, you
-              may have rights to request access, correction, deletion,
-              restriction or objection regarding personal data controlled by
-              AztraTech. Contact AztraTech by email to make a request.
+              Lead records submitted through the project-context form,
+              scheduling records and business correspondence are kept as
+              ordinary business records for as long as they are needed for
+              the relationship, operational records or applicable legal
+              obligations. AztraTech does not currently run an automated
+              process to delete the pseudonymous IP-derived rate-limiting
+              value after a fixed period; if an automated retention process
+              is added, this notice will be updated to describe it.
+              Depending on the law that applies to you, you may have rights
+              to request access, correction, deletion, restriction or
+              objection regarding personal data controlled by AztraTech.
+              Contact AztraTech by email to make a request.
             </p>
           </div>
 
           <div className="privacy-section privacy-section--note">
             <span>CHANGES TO THIS NOTICE</span>
             <p>
-              This notice will be updated if the website begins using analytics,
-              advertising technology, embedded forms, CRM integrations or other
-              data-processing features that materially change the current model.
+              This notice will be updated if the website begins using
+              analytics, advertising technology, an email or CRM
+              notification service connected to the form, or other
+              data-processing features that materially change the current
+              model.
             </p>
           </div>
         </Container>
