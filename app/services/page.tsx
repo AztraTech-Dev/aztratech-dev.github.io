@@ -116,8 +116,10 @@ export default function ServicesPage() {
             {technologyAreas.map((area, index) => (
               <article className="service-capability" key={area.title}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                <h2>{area.title}</h2>
-                <p>{area.body}</p>
+                <div>
+                  <h2>{area.title}</h2>
+                  <p>{area.body}</p>
+                </div>
               </article>
             ))}
           </div>

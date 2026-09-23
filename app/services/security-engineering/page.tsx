@@ -73,8 +73,10 @@ export default function SecurityEngineeringPage() {
             {architectureRisks.map((risk, index) => (
               <article className="service-feature-card" key={risk.title}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{risk.title}</h3>
-                <p>{risk.body}</p>
+                <div>
+                  <h3>{risk.title}</h3>
+                  <p>{risk.body}</p>
+                </div>
               </article>
             ))}
           </div>

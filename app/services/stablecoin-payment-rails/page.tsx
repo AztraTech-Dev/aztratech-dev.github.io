@@ -72,8 +72,10 @@ export default function StablecoinPaymentRailsPage() {
             {integrationProblems.map((problem, index) => (
               <article className="service-feature-card" key={problem.title}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{problem.title}</h3>
-                <p>{problem.body}</p>
+                <div>
+                  <h3>{problem.title}</h3>
+                  <p>{problem.body}</p>
+                </div>
               </article>
             ))}
           </div>

@@ -82,18 +82,24 @@ export default function RwaTokenizationPage() {
           <div className="service-feature-grid service-feature-grid--three">
             <article className="service-feature-card">
               <span>01</span>
-              <h3>Participant state</h3>
-              <p>Qualification, identity references, permissions and account relationships change over time.</p>
+              <div>
+                <h3>Participant state</h3>
+                <p>Qualification, identity references, permissions and account relationships change over time.</p>
+              </div>
             </article>
             <article className="service-feature-card">
               <span>02</span>
-              <h3>Asset operations</h3>
-              <p>Corporate actions, servicing events, freezes, corrections and redemptions need controlled workflows.</p>
+              <div>
+                <h3>Asset operations</h3>
+                <p>Corporate actions, servicing events, freezes, corrections and redemptions need controlled workflows.</p>
+              </div>
             </article>
             <article className="service-feature-card">
               <span>03</span>
-              <h3>Operational records</h3>
-              <p>Teams still need a coherent record of actions, approvals and exceptions across systems.</p>
+              <div>
+                <h3>Operational records</h3>
+                <p>Teams still need a coherent record of actions, approvals and exceptions across systems.</p>
+              </div>
             </article>
           </div>
         </Container>
@@ -116,8 +122,10 @@ export default function RwaTokenizationPage() {
             {transferChecks.map((item, index) => (
               <article className="service-feature-card" key={item.title}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </div>
               </article>
             ))}
           </div>
