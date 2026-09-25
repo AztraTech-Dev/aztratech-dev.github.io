@@ -274,9 +274,11 @@ export default function LeadForm({ source }: LeadFormProps) {
           setStatusMessage("The form has errors.");
           focusFirstError(mapped);
         } else {
+          // formError below renders with role="alert", which already
+          // announces this text; setting the same string into the
+          // aria-live="polite" region too would announce it twice.
           setFormError(MESSAGES.sendFailed);
           setStatus("idle");
-          setStatusMessage(MESSAGES.sendFailed);
         }
         return;
       }
@@ -284,7 +286,6 @@ export default function LeadForm({ source }: LeadFormProps) {
       if (response.status === 429) {
         setFormError(MESSAGES.rateLimited);
         setStatus("idle");
-        setStatusMessage(MESSAGES.rateLimited);
         return;
       }
 
@@ -293,7 +294,6 @@ export default function LeadForm({ source }: LeadFormProps) {
       void errorBody; // Never surfaced -- backend internals are not shown to the user.
       setFormError(MESSAGES.sendFailed);
       setStatus("idle");
-      setStatusMessage(MESSAGES.sendFailed);
     } catch (err) {
       if (!mountedRef.current) return;
       // Both a client-side timeout (AbortError) and a genuine network
@@ -302,7 +302,6 @@ export default function LeadForm({ source }: LeadFormProps) {
       void err;
       setFormError(MESSAGES.unreachable);
       setStatus("idle");
-      setStatusMessage(MESSAGES.unreachable);
     } finally {
       clearTimeout(timeoutId);
       abortRef.current = null;
