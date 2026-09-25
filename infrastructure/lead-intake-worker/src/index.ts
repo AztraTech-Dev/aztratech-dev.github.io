@@ -91,8 +91,9 @@ function base64UrlEncode(bytes: Uint8Array): string {
  * Daily-keyed HMAC-SHA256 of the client IP, truncated to ~128 bits and
  * base64url-encoded. The raw IP is never stored -- only this derived
  * value ever reaches D1. Rotating the date into the message means a
- * given day's hashes cannot be correlated with another day's, even by
- * someone with database access and the key.
+ * given day's hashes cannot be correlated with another day's from the
+ * database alone. The value is pseudonymous, not anonymous: a holder of
+ * IP_HASH_KEY can recompute it for any candidate IP and date.
  *
  * Known, accepted edge case: an hour-long rate-limit window that
  * straddles UTC midnight resets slightly early, since the hash changes

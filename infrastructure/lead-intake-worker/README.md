@@ -93,9 +93,14 @@ Both keys are the daily-rotating IP HMAC (below), never a raw IP.
   request.
 - `ip_hash` = `base64url(HMAC-SHA256(IP_HASH_KEY, "<UTC-date>|<clientIp>")[0:16 bytes])`,
   computed with native `crypto.subtle`. Keyed (not a bare hash) so it
-  cannot be reversed without the secret; rotates daily so hashes from
-  different days cannot be correlated even by someone with database
-  access and the key.
+  cannot be reversed or linked across days without the secret. The UTC
+  date in the message makes the value change daily, so database access
+  alone cannot link one day's hashes to another's. It is **pseudonymous,
+  not anonymous**: anyone holding `IP_HASH_KEY` can recompute the value
+  for a candidate IP on any date (and the IPv4 space is small enough to
+  enumerate), so the key must stay secret.
+- There is no automatic deletion of `ip_hash` values; they persist with
+  the lead row until removed manually.
 - **User-Agent is never stored, never logged.**
 - If `CF-Connecting-IP` is absent, `ip_hash` is `NULL` -- no header is
   ever trusted as a substitute for it (in particular, `X-Forwarded-For`
