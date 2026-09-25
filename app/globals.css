@@ -3090,20 +3090,40 @@ summary {
     grid-template-columns: 1fr;
   }
 
-  .payment-architecture__external > div,
-  .asset-lifecycle__track,
-  .security-lifecycle__stages,
-  .threat-control__inputs {
+  .payment-architecture__external > div {
     grid-template-columns: 1fr;
   }
 
+  /* These desktop grids (9 / 4 / 4 / 4 cells) previously collapsed to a
+     single mobile column while keeping their desktop min-height per cell,
+     producing a very tall stack of mostly-empty boxes. A 2-column mobile
+     grid halves that height with room to spare -- every label here is
+     short enough not to wrap awkwardly at half width -- and the reduced
+     min-height matches what each cell's own content actually needs, not
+     what looked balanced in a 3/4-wide desktop row. Order and labels are
+     unchanged; only the column count and floor height change. */
+  .asset-lifecycle__track,
+  .security-lifecycle__stages,
+  .threat-control__inputs,
   .payment-state-model__flow {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
+  .asset-lifecycle__stage {
+    min-height: 76px;
+  }
+
+  .security-lifecycle__stage {
+    min-height: 84px;
+  }
+
+  .threat-control__inputs > div {
+    min-height: 78px;
+  }
+
   .payment-state-model__node {
-    min-height: 92px;
+    min-height: 76px;
   }
 
   .payment-state-model__connector {
