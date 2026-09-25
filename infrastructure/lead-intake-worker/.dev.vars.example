@@ -1,1 +1,5 @@
 IP_HASH_KEY="<set locally; never commit the real value>"
+# Optional locally. Leave unset (or a fake value) so local dev never sends
+# real email; the notification then fails and is logged as lead_notify_failed
+# while the lead is still stored.
+RESEND_API_KEY="<fake-local-placeholder; never commit a real key>"

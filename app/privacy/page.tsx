@@ -21,7 +21,7 @@ const currentDataPoints = [
   ],
   [
     "Project context form",
-    "The homepage and the Contact page include a short form for sending a written project context instead of booking a call. The form collects your name, email address, an optional company or project name, the context you write and which page you submitted it from. Submissions are sent to a Cloudflare Worker and stored in a Cloudflare D1 database configured for the EU jurisdiction. AztraTech uses this information only to review the message and reply if there is a useful next step. There is currently no email or CRM notification service connected to the form; submissions are reviewed directly from the stored records. Do not send private keys, seed phrases, credentials or other secrets through the form.",
+    "The homepage and the Contact page include a short form for sending a written project context instead of booking a call. The form collects your name, email address, an optional company or project name, the context you write and which page you submitted it from. Submissions are sent to a Cloudflare Worker and stored in a Cloudflare D1 database configured for the EU jurisdiction, which remains the primary record of each submission. After a submission is stored, AztraTech uses Resend, a transactional email service, to send itself an internal notification about it. That notification contains the details you submitted, a submission reference and the time it was received, so this information is transmitted through Resend. It is an operational message to AztraTech only; the form is not used to send marketing email. The notification does not include your IP address or the pseudonymous rate-limiting value described below. AztraTech uses this information only to review the message and reply if there is a useful next step. Do not send private keys, seed phrases, credentials or other secrets through the form.",
   ],
   [
     "Technical abuse prevention on the form",
@@ -52,7 +52,7 @@ export default function PrivacyPage() {
           </p>
           <div className="privacy-status">
             <span>EFFECTIVE</span>
-            <strong>23 September 2026</strong>
+            <strong>25 September 2026</strong>
           </div>
         </Container>
       </section>
@@ -107,7 +107,9 @@ export default function PrivacyPage() {
               submissions are stored in a Cloudflare D1 database configured
               for the EU jurisdiction; Cloudflare&apos;s network may still
               process the underlying web request at other locations as part
-              of ordinary request routing. Calendly provides the external
+              of ordinary request routing. Resend is used to send AztraTech
+              an operational email notification about each new form
+              submission. Calendly provides the external
               scheduling service. Links can also take you to LinkedIn,
               Telegram, GitHub or other third-party destinations. These
               providers may process data in different countries and apply
@@ -138,8 +140,8 @@ export default function PrivacyPage() {
             <span>CHANGES TO THIS NOTICE</span>
             <p>
               This notice will be updated if the website begins using
-              analytics, advertising technology, an email or CRM
-              notification service connected to the form, or other
+              analytics, advertising technology, a CRM connected to the
+              form, a different notification service for the form, or other
               data-processing features that materially change the current
               model.
             </p>

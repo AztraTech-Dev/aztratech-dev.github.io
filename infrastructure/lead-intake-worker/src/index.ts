@@ -2,7 +2,9 @@
 //
 // POST /lead is the only public route. D1 storage is authoritative: a
 // successful INSERT is the definition of a successfully captured lead.
-// There is no notification step in this phase.
+// An operational email notification (Resend) is scheduled only after that
+// INSERT succeeds, runs via ctx.waitUntil() after the response, and is
+// best-effort: its failure never changes the visitor's response.
 //
 // Request processing order (see README.md for the full rationale):
 //   1. Route / OPTIONS handling
@@ -20,16 +22,21 @@
 //  13. Generate the real requestId
 //  14. INSERT with a prepared statement (authoritative success point)
 //  15. Log successful storage without PII
-//  16. Return 200
+//  16. Schedule best-effort notification (ctx.waitUntil, never awaited)
+//  17. Return 200
 
 import { isHoneypotTriggered, validateLead } from "./validate";
 import { jsonResponse, preflightResponse, type CorsContext } from "./respond";
+import { NotificationError, sendLeadNotification } from "./notify";
 
 export interface Env {
   DB: D1Database;
   RATE_LIMIT: RateLimit;
   ALLOWED_ORIGINS: string;
   IP_HASH_KEY: string;
+  RESEND_API_KEY: string;
+  NOTIFICATION_RECIPIENT: string;
+  NOTIFICATION_FROM: string;
 }
 
 const MAX_BODY_BYTES = 16384;
@@ -37,13 +44,22 @@ const HOURLY_LIMIT = 5;
 const HOUR_MS = 60 * 60 * 1000;
 
 type LogEvent = {
-  event: "lead_stored" | "lead_rejected" | "lead_rate_limited" | "lead_honeypot" | "store_failed";
+  event:
+    | "lead_stored"
+    | "lead_rejected"
+    | "lead_rate_limited"
+    | "lead_honeypot"
+    | "store_failed"
+    | "lead_notify_succeeded"
+    | "lead_notify_failed";
   requestId?: string;
   source?: string;
   tier?: "burst" | "hourly";
   fields?: string[];
   reason?: string;
   durationMs?: number;
+  provider?: "resend";
+  status?: number;
 };
 
 // Structured, PII-free logging. Never pass name/email/company/context, a
@@ -135,7 +151,7 @@ async function readBodyWithCap(request: Request, maxBytes: number): Promise<stri
 }
 
 export default {
-  async fetch(request: Request, env: Env, _ctx: ExecutionContext): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const start = Date.now();
     const url = new URL(request.url);
 
@@ -299,7 +315,35 @@ export default {
     // 15. Log successful storage without PII.
     logEvent({ event: "lead_stored", requestId, source: lead.source, durationMs: Date.now() - start });
 
-    // 16. Return.
+    // 16. Best-effort notification. Scheduled only after the INSERT has
+    //     succeeded and never awaited here, so the response neither waits
+    //     for nor depends on email delivery. The chain catches its own
+    //     failure; only PII-free fields are logged.
+    ctx.waitUntil(
+      sendLeadNotification(
+        {
+          apiKey: env.RESEND_API_KEY,
+          recipient: env.NOTIFICATION_RECIPIENT,
+          from: env.NOTIFICATION_FROM,
+        },
+        { requestId, createdAt, lead },
+      )
+        .then((status) => {
+          logEvent({ event: "lead_notify_succeeded", requestId, source: lead.source, provider: "resend", status });
+        })
+        .catch((err: unknown) => {
+          logEvent({
+            event: "lead_notify_failed",
+            requestId,
+            source: lead.source,
+            provider: "resend",
+            reason: err instanceof NotificationError ? err.reason : "unknown",
+            status: err instanceof NotificationError ? err.status : undefined,
+          });
+        }),
+    );
+
+    // 17. Return.
     return jsonResponse(200, { ok: true, requestId }, cors);
   },
 };

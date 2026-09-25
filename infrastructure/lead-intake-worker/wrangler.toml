@@ -20,6 +20,10 @@ simple = { limit = 3, period = 60 }
 
 [vars]
 ALLOWED_ORIGINS = "https://aztra.tech"
+# Best-effort lead notification (Resend). Non-secret addresses only.
+NOTIFICATION_RECIPIENT = "vladyslav.usichenko@aztra.tech"
+NOTIFICATION_FROM = "AztraTech Leads <leads@notify.aztra.tech>"
 
-# IP_HASH_KEY is a secret and is never set here. Local dev: infrastructure/lead-intake-worker/.dev.vars
-# (gitignored). Production: `wrangler secret put IP_HASH_KEY`.
+# IP_HASH_KEY and RESEND_API_KEY are secrets and are never set here. Local dev:
+# infrastructure/lead-intake-worker/.dev.vars (gitignored). Production:
+# `wrangler secret put IP_HASH_KEY` / `wrangler secret put RESEND_API_KEY`.
